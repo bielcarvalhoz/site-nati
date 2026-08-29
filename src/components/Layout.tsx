@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { CONTACT_ID, CONTENT_ID, NAV_ITEMS, TOP_ID } from '../lib/nav'
+import { isHttps } from '../lib/url'
 import { SITE } from '../data/site'
 import styles from './Layout.module.css'
 
@@ -89,7 +90,7 @@ export default function Layout({ children }: Props) {
               </a>
             )}
             <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-            {SITE.instagram && (
+            {isHttps(SITE.instagram) && (
               <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">
                 Instagram
               </a>

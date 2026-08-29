@@ -1,11 +1,15 @@
 .filter {
   display: flex;
-  gap: var(--space-2xs);
+  gap: var(--space-sm);
   margin-bottom: var(--space-xl);
 }
 
 .filterBtn {
-  padding: 0.5rem 1rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.6rem 1.1rem;
   border: 1px solid var(--hairline);
   border-radius: var(--radius);
   background: transparent;
@@ -15,14 +19,21 @@
   letter-spacing: var(--tracking-mono);
   color: var(--muted);
   cursor: pointer;
-  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
 }
 .filterBtn:hover {
   color: var(--ink);
 }
 .filterBtn[aria-pressed='true'] {
-  color: var(--ink);
+  color: var(--bg);
+  background: var(--ink);
   border-color: var(--ink);
+}
+
+.count {
+  font-size: 0.85em;
+  opacity: 0.7;
 }
 
 .grid {
@@ -139,8 +150,8 @@
   position: absolute;
   top: var(--space-sm);
   right: var(--space-sm);
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 1px solid var(--hairline);

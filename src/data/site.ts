@@ -11,13 +11,13 @@ export const SITE = {
   tagline:
     'Arquitetura e design de interiores para casas, apartamentos e comércio — do primeiro estudo à obra entregue.',
   heroLead:
-    'Do primeiro estudo à obra entregue, conduzo cada projeto com processo definido, orçamento previsível e projeto executivo detalhado — para a obra sair sem surpresa.',
+    'Cada projeto nasce de como as pessoas usam o espaço e chega ao canteiro com desenho executivo completo, para a obra construir exatamente o que foi projetado.',
 
   footerLine: 'Arquitetura residencial, comercial e de interiores — do conceito à obra.',
 
   email: 'contato@nataliamd.arq.br',
-  phone: '+55 11 4002-8922',
-  whatsapp: '5511940028922',
+  phone: '+55 11 3000-0000',
+  whatsapp: '5511930000000',
   city: 'São Paulo, SP',
   cau: 'CAU/BR A000000-0',
   instagram: 'https://instagram.com/nataliamd.arq',
@@ -25,7 +25,7 @@ export const SITE = {
 
   about: [
     'Sou arquiteta e urbanista com atuação em projeto e acompanhamento de obra. Trabalho com residências, espaços comerciais e reformas, sempre partindo de como as pessoas realmente usam o espaço.',
-    'Meu processo é próximo e transparente: você acompanha cada decisão, do layout à especificação de acabamentos, e recebe um projeto pronto para executar, sem surpresa de orçamento.',
+    'Trabalho lado a lado com quem vai morar ou operar o espaço, do primeiro layout à última especificação de acabamento. O cliente entende cada decisão porque participou dela.',
     'Ao longo dos anos passei por escritórios de portes diferentes, o que me deu repertório tanto para o projeto autoral quanto para a coordenação com engenharia, marcenaria e fornecedores.',
   ],
 } as const satisfies SiteContent

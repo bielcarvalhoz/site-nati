@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom/vitest'
 
-// jsdom ships none of these APIs; components rely on them.
+// jsdom ships neither of these; components rely on them.
 const g = globalThis as unknown as {
   matchMedia?: (q: string) => MediaQueryList
-  IntersectionObserver?: typeof IntersectionObserver
 }
 
 if (!g.matchMedia) {
@@ -18,25 +17,6 @@ if (!g.matchMedia) {
       removeEventListener: () => {},
       dispatchEvent: () => false,
     }) as unknown as MediaQueryList
-}
-
-if (!g.IntersectionObserver) {
-  class IntersectionObserverMock {
-    cb: IntersectionObserverCallback
-    constructor(cb: IntersectionObserverCallback) {
-      this.cb = cb
-    }
-    observe = (el: Element) => {
-      this.cb(
-        [{ isIntersecting: true, target: el } as IntersectionObserverEntry],
-        this as unknown as IntersectionObserver,
-      )
-    }
-    unobserve = () => {}
-    disconnect = () => {}
-    takeRecords = () => []
-  }
-  g.IntersectionObserver = IntersectionObserverMock as unknown as typeof IntersectionObserver
 }
 
 // jsdom leaves <dialog> open/close unimplemented — make them track the `open` prop.

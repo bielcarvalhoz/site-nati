@@ -30,7 +30,7 @@ export const SERVICES = [
     id: 'reforma',
     title: 'Reforma',
     description:
-      'Reformas residenciais e comerciais com escopo, prazo e orçamento definidos antes de começar.',
+      'Reformas residenciais e comerciais, do diagnóstico da estrutura existente ao detalhamento para execução.',
     deliverables: [
       'Levantamento e diagnóstico',
       'Projeto de demolir e construir',
@@ -59,7 +59,4 @@ export const TOOLS = [
   'SketchUp',
   'Enscape',
   'Lumion',
-  'Adobe Photoshop',
-  'Adobe InDesign',
-  'Excel / orçamento',
 ] as const satisfies readonly string[]

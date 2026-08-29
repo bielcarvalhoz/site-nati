@@ -1,23 +1,22 @@
 import { SITE } from '../data/site'
+import { SECTION, titleIdFor } from '../lib/nav'
+import { isHttps } from '../lib/url'
 import SectionHead from '../components/SectionHead'
 import styles from './Contact.module.css'
 
-const TITLE_ID = 'contato-title'
-
 export default function Contact() {
   return (
-    <section id="contato" className="section container" aria-labelledby={TITLE_ID}>
-      <SectionHead
-        index="05"
-        eyebrow="Contato"
-        title="Vamos conversar sobre o seu projeto"
-        titleId={TITLE_ID}
-      />
+    <section
+      id={SECTION.contato}
+      className="section container"
+      aria-labelledby={titleIdFor(SECTION.contato)}
+    >
+      <SectionHead sectionId={SECTION.contato} index="05" eyebrow="Contato" title="Vamos conversar" />
 
       <div className={styles.layout}>
         <p className={styles.intro}>
-          Conte um pouco sobre o espaço, o prazo e o que você espera do projeto. Respondo em
-          até dois dias úteis.
+          Sobre um projeto, uma vaga ou uma parceria — conte o contexto e o que você tem em
+          mente. Respondo pessoalmente em até dois dias úteis.
         </p>
 
         <ul className={styles.channels}>
@@ -40,7 +39,7 @@ export default function Contact() {
               </a>
             </li>
           ) : null}
-          {SITE.instagram ? (
+          {isHttps(SITE.instagram) ? (
             <li>
               <a
                 className={styles.channel}
@@ -54,8 +53,6 @@ export default function Contact() {
             </li>
           ) : null}
         </ul>
-
-        <p className={styles.note}>Formulário de contato entra no próximo passo.</p>
       </div>
     </section>
   )

@@ -1,18 +1,25 @@
 import { JOURNEY } from '../data/journey'
 import { METRICS } from '../data/metrics'
+import { SECTION, titleIdFor } from '../lib/nav'
 import SectionHead from '../components/SectionHead'
 import styles from './Journey.module.css'
 
-const TITLE_ID = 'trajetoria-title'
-const METRICS_SHOWN = METRICS.slice(0, 3)
-
 export default function Journey() {
   return (
-    <section id="trajetoria" className="section container" aria-labelledby={TITLE_ID}>
-      <SectionHead index="03" eyebrow="Trajetória" title="Formação e experiência" titleId={TITLE_ID} />
+    <section
+      id={SECTION.trajetoria}
+      className="section container"
+      aria-labelledby={titleIdFor(SECTION.trajetoria)}
+    >
+      <SectionHead
+        sectionId={SECTION.trajetoria}
+        index="02"
+        eyebrow="Trajetória"
+        title="Formação e experiência"
+      />
 
       <ul className={styles.metrics}>
-        {METRICS_SHOWN.map((metric) => (
+        {METRICS.map((metric) => (
           <li key={metric.label}>
             <span className={styles.metricValue}>{metric.value}</span>
             <span className={styles.metricLabel}>{metric.label}</span>

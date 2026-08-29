@@ -1,10 +1,9 @@
 import type { Metric } from './types'
 
-/* Números de prova social. Valores fictícios — trocar pelos reais antes de publicar.
-   TODO trocar: todos os valores. */
+/* Números de credibilidade — devem bater com a linha do tempo em journey.ts.
+   Valores fictícios — trocar pelos reais antes de publicar. TODO trocar. */
 export const METRICS = [
-  { value: '+80', label: 'projetos entregues' },
+  { value: 'Mais de 80', label: 'projetos entregues' },
   { value: '12.000 m²', label: 'projetados' },
-  { value: '8 anos', label: 'de atuação' },
-  { value: '100%', label: 'das obras acompanhadas' },
+  { value: 'Mais de 8 anos', label: 'de atuação' },
 ] as const satisfies readonly Metric[]

@@ -1,17 +1,20 @@
 import { SERVICES, TOOLS } from '../data/services'
+import { SECTION, titleIdFor } from '../lib/nav'
 import SectionHead from '../components/SectionHead'
 import styles from './Services.module.css'
 
-const TITLE_ID = 'servicos-title'
-
 export default function Services() {
   return (
-    <section id="servicos" className="section container" aria-labelledby={TITLE_ID}>
+    <section
+      id={SECTION.servicos}
+      className="section container"
+      aria-labelledby={titleIdFor(SECTION.servicos)}
+    >
       <SectionHead
-        index="02"
+        sectionId={SECTION.servicos}
+        index="04"
         eyebrow="Serviços"
         title="Projeto, interiores e acompanhamento de obra"
-        titleId={TITLE_ID}
       />
 
       <div className={styles.grid}>

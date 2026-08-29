@@ -4,9 +4,12 @@ import { ACADEMICOS, PROJECTS, REALIZADOS } from './projects'
 import { JOURNEY } from './journey'
 import { SERVICES, TOOLS } from './services'
 import { METRICS } from './metrics'
+import { SITE } from './site'
+import type { Project } from './types'
 import Placeholder from '../components/Placeholder'
 
 const nonEmpty = (s: string) => typeof s === 'string' && s.trim().length > 0
+const projects: readonly Project[] = PROJECTS
 
 describe('projects', () => {
   it('have unique ids', () => {
@@ -29,12 +32,11 @@ describe('projects', () => {
   })
 
   it('when a gallery or cover is present, it is non-empty', () => {
-    for (const p of PROJECTS) {
-      if ('cover' in p) expect(nonEmpty(p.cover as string)).toBe(true)
-      if ('gallery' in p) {
-        const g = p.gallery as readonly string[]
-        expect(g.length).toBeGreaterThan(0)
-        for (const src of g) expect(nonEmpty(src)).toBe(true)
+    for (const p of projects) {
+      if (p.cover !== undefined) expect(nonEmpty(p.cover)).toBe(true)
+      if (p.gallery !== undefined) {
+        expect(p.gallery.length).toBeGreaterThan(0)
+        for (const src of p.gallery) expect(nonEmpty(src)).toBe(true)
       }
     }
   })
@@ -74,6 +76,16 @@ describe('services', () => {
   it('lists tools', () => {
     expect(TOOLS.length).toBeGreaterThan(0)
     for (const t of TOOLS) expect(nonEmpty(t)).toBe(true)
+  })
+})
+
+describe('site contact values', () => {
+  it('whatsapp is digits only (wa.me needs a bare number)', () => {
+    if (SITE.whatsapp !== undefined) expect(SITE.whatsapp).toMatch(/^\d+$/)
+  })
+
+  it('instagram, if set, is an https URL', () => {
+    if (SITE.instagram !== undefined) expect(SITE.instagram.startsWith('https://')).toBe(true)
   })
 })
 

@@ -1,14 +1,22 @@
 import { SITE } from '../data/site'
+import { SECTION, titleIdFor } from '../lib/nav'
 import Placeholder from '../components/Placeholder'
 import SectionHead from '../components/SectionHead'
 import styles from './About.module.css'
 
-const TITLE_ID = 'sobre-title'
-
 export default function About() {
   return (
-    <section id="sobre" className="section container" aria-labelledby={TITLE_ID}>
-      <SectionHead index="04" eyebrow="Sobre" title="Quem assina os projetos" titleId={TITLE_ID} />
+    <section
+      id={SECTION.sobre}
+      className="section container"
+      aria-labelledby={titleIdFor(SECTION.sobre)}
+    >
+      <SectionHead
+        sectionId={SECTION.sobre}
+        index="03"
+        eyebrow="Sobre"
+        title="Quem assina os projetos"
+      />
 
       <div className={styles.layout}>
         <div className={styles.portrait}>

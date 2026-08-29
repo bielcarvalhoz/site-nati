@@ -18,7 +18,7 @@ export const PROJECTS = [
     context:
       'Planta compartimentada, cozinha isolada e pouca luz natural no miolo. O casal precisava de dois postos de trabalho sem abrir mão de receber.',
     solution:
-      'Integração da cozinha com a sala, marcenaria sob medida que esconde um home office e um painel ripado que leva luz ao corredor. Entrega com projeto executivo e acompanhamento de obra.',
+      'Integração da cozinha com a sala, marcenaria sob medida que esconde um home office e um painel ripado que leva luz ao corredor.',
   },
   {
     id: 'casa-cotia',
@@ -32,7 +32,7 @@ export const PROJECTS = [
     context:
       'Terreno em aclive e exposto ao sol poente. A família queria áreas sociais amplas e privacidade em relação à rua.',
     solution:
-      'Volume em "L" voltado para um pátio interno, cobertura com beiral generoso a oeste e brises de madeira. Projeto de arquitetura e interiores coordenado com a engenharia.',
+      'Volume em "L" voltado para um pátio interno, cobertura com beiral generoso a oeste e brises de madeira que filtram o sol da tarde.',
   },
   {
     id: 'cafe-pinheiros',
@@ -46,7 +46,7 @@ export const PROJECTS = [
     context:
       'Ponto pequeno, pé-direito baixo e necessidade de girar mesas rápido no horário de pico sem parecer apertado.',
     solution:
-      'Balcão como âncora visual, espelho contínuo que dobra o pé-direito percebido, mobiliário modular e paleta de concreto, aço e madeira clara. Obra entregue em 9 semanas.',
+      'Balcão como âncora visual, espelho contínuo que dobra o pé-direito percebido, mobiliário modular e paleta de concreto, aço e madeira clara.',
   },
   {
     id: 'clinica-itaim',
@@ -60,7 +60,7 @@ export const PROJECTS = [
     context:
       'Laje corrida sem divisórias e exigências de fluxo (limpo/sujo), acústica entre consultórios e uma recepção que não intimidasse o paciente.',
     solution:
-      'Setorização clara, forro acústico, revestimentos laváveis especificados por ambiente e uma recepção com marcenaria amadeirada e iluminação quente. Compatibilização com projetos elétrico e hidráulico.',
+      'Setorização clara entre fluxos, forro acústico entre consultórios e uma recepção com marcenaria amadeirada e luz quente que tira o peso do ambiente clínico.',
   },
   {
     id: 'cobertura-perdizes',
@@ -88,7 +88,7 @@ export const PROJECTS = [
     context:
       'Imóvel histórico com restrições de intervenção, estrutura de madeira aparente e orçamento enxuto.',
     solution:
-      'Araras e expositores autoportantes (nada fixado nas paredes originais), iluminação em trilho e provador central como peça escultórica. Intervenção 100 % reversível.',
+      'Araras e expositores autoportantes (nada fixado nas paredes originais), iluminação em trilho e provador central como peça escultórica. Intervenção 100% reversível.',
   },
   {
     id: 'tfg-habitacao-heliopolis',
@@ -144,5 +144,5 @@ export const PROJECTS = [
   },
 ] as const satisfies readonly Project[]
 
-export const REALIZADOS = PROJECTS.filter((p) => p.category === 'realizado')
-export const ACADEMICOS = PROJECTS.filter((p) => p.category === 'academico')
+export const REALIZADOS: readonly Project[] = PROJECTS.filter((p) => p.category === 'realizado')
+export const ACADEMICOS: readonly Project[] = PROJECTS.filter((p) => p.category === 'academico')

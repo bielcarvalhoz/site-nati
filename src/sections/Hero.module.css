@@ -21,16 +21,17 @@
   color: var(--muted);
 }
 
-/* Reserved area for the Step 4 3D scene — keeps the fold height stable now. */
+/* Reserved area for the Step 4 3D scene. Kept low-key so it doesn't read as a
+   broken image before the scene lands. */
 .stage {
   margin-top: var(--space-2xl);
-  aspect-ratio: 16 / 7;
-  border: 1px solid var(--hairline);
-  background: linear-gradient(180deg, var(--bg-raised), var(--bg-sunken));
+  aspect-ratio: 21 / 9;
+  border-top: 1px solid var(--hairline);
+  background: radial-gradient(120% 140% at 50% 0%, var(--bg-raised), var(--bg) 70%);
 }
 
 @media (max-width: 40rem) {
   .stage {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
   }
 }

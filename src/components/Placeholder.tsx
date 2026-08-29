@@ -2,7 +2,7 @@
    Same `seed` always yields the same concrete-tone panel, so the grid looks
    intentional rather than random. Drop a real `cover` on the project to replace it. */
 
-const TONES = ['#c9c5bd', '#b8b3a8', '#a7a196', '#d3cfc7', '#9c968b', '#bdb8ac']
+const TONES = ['#c9c5bd', '#b8b3a8', '#a7a196', '#d3cfc7', '#9c968b', '#bdb8ac'] as const
 
 function hash(s: string): number {
   let h = 2166136261
@@ -13,6 +13,8 @@ function hash(s: string): number {
   return h >>> 0
 }
 
+const pick = (i: number): string => TONES[i % TONES.length] ?? TONES[0]
+
 type Props = {
   seed: string
   /** Accessible label — usually the project title. */
@@ -22,11 +24,10 @@ type Props = {
 
 export default function Placeholder({ seed, label, className }: Props) {
   const h = hash(seed)
-  // modulo of a non-empty literal array — always in bounds
-  const a = TONES[h % TONES.length]!
-  const b = TONES[(h >> 8) % TONES.length]!
+  const a = pick(h)
+  const b = pick(h >> 8)
   const angle = h % 180
-  const gid = `ph-${(h >>> 0).toString(36)}`
+  const gid = `ph-${h.toString(36)}`
 
   return (
     <svg
@@ -43,8 +44,7 @@ export default function Placeholder({ seed, label, className }: Props) {
         </linearGradient>
       </defs>
       <rect width="400" height="300" fill={`url(#${gid})`} />
-      <rect x="0.5" y="0.5" width="399" height="299" fill="none" stroke="rgba(25,25,23,0.12)" />
-      <rect x="376" y="276" width="16" height="16" fill="#a8572f" />
+      <rect x="0.5" y="0.5" width="399" height="299" fill="none" stroke="rgba(25,25,23,0.1)" />
     </svg>
   )
 }

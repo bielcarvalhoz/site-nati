@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ACADEMICOS, REALIZADOS } from '../data/projects'
 import type { Project, ProjectCategory } from '../data/types'
+import { SECTION, titleIdFor } from '../lib/nav'
 import Placeholder from '../components/Placeholder'
 import SectionHead from '../components/SectionHead'
 import styles from './Projects.module.css'
 
-const TITLE_ID = 'projetos-title'
 const DIALOG_TITLE_ID = 'projeto-dialog-title'
 
 function ProjectImage({ project }: { project: Project }) {
@@ -42,8 +42,13 @@ export default function Projects() {
   }, [selected])
 
   return (
-    <section id="projetos" className="section container" aria-labelledby={TITLE_ID}>
-      <SectionHead index="01" eyebrow="Projetos" title="Projetos selecionados" titleId={TITLE_ID} />
+    <section id={SECTION.projetos} className="section container" aria-labelledby={titleIdFor(SECTION.projetos)}>
+      <SectionHead
+        sectionId={SECTION.projetos}
+        index="01"
+        eyebrow="Projetos"
+        title="Projetos selecionados"
+      />
 
       <div className={styles.filter} role="group" aria-label="Filtrar projetos">
         <button
@@ -52,7 +57,7 @@ export default function Projects() {
           aria-pressed={filter === 'realizado'}
           onClick={() => setFilter('realizado')}
         >
-          Realizados
+          Profissionais <span className={styles.count}>{REALIZADOS.length}</span>
         </button>
         <button
           type="button"
@@ -60,7 +65,7 @@ export default function Projects() {
           aria-pressed={filter === 'academico'}
           onClick={() => setFilter('academico')}
         >
-          Acadêmicos
+          Acadêmicos <span className={styles.count}>{ACADEMICOS.length}</span>
         </button>
       </div>
 
@@ -116,7 +121,7 @@ export default function Projects() {
 
             <div className={styles.dialogBody}>
               <p className="eyebrow">
-                {selected.category === 'realizado' ? 'Projeto realizado' : 'Trabalho acadêmico'}
+                {selected.category === 'realizado' ? 'Projeto profissional' : 'Trabalho acadêmico'}
               </p>
               <h3 id={DIALOG_TITLE_ID} className={styles.dialogTitle}>
                 {selected.title}
@@ -133,7 +138,7 @@ export default function Projects() {
                   <p>{selected.context}</p>
                 </div>
                 <div>
-                  <h4>Projeto</h4>
+                  <h4>Partido</h4>
                   <p>{selected.solution}</p>
                 </div>
               </div>

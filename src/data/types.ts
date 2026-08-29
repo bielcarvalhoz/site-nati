@@ -47,8 +47,8 @@ export type Project = {
   solution: string
   /** Image path. Absent → a deterministic placeholder is rendered from `id`. */
   cover?: string
-  /** Extra images. When present, must be non-empty. */
-  gallery?: readonly string[]
+  /** Extra images. The tuple type makes an empty gallery a compile error. */
+  gallery?: readonly [string, ...string[]]
 }
 
 export type JourneyEntry = {
