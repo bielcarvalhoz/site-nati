@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { SITE } from '../data/site'
 import { TOP_ID } from '../lib/nav'
 import styles from './Hero.module.css'
@@ -37,6 +37,18 @@ function useSceneMode(): SceneMode {
 
 export default function Hero() {
   const mode = useSceneMode()
+  const stageRef = useRef<HTMLDivElement>(null)
+  const [onScreen, setOnScreen] = useState(true)
+
+  useEffect(() => {
+    const el = stageRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver((entries) => setOnScreen(!!entries[0]?.isIntersecting), {
+      threshold: 0.05,
+    })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   return (
     <section id={TOP_ID} className={`container ${styles.hero}`} aria-label="Apresentação">
@@ -45,10 +57,10 @@ export default function Hero() {
       <p className={styles.lede}>{SITE.tagline}</p>
       <p className={styles.lead}>{SITE.heroLead}</p>
 
-      <div className={styles.stage} aria-hidden="true">
+      <div ref={stageRef} className={styles.stage} aria-hidden="true">
         {mode !== 'off' ? (
           <Suspense fallback={null}>
-            <HeroScene lowPower={mode === 'low'} />
+            <HeroScene lowPower={mode === 'low'} active={onScreen} />
           </Suspense>
         ) : null}
       </div>

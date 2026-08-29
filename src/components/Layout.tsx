@@ -1,14 +1,18 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { CONTACT_ID, CONTENT_ID, NAV_ITEMS, TOP_ID } from '../lib/nav'
 import { isHttps } from '../lib/url'
+import { useScrollSpy } from '../hooks/useScrollSpy'
 import { SITE } from '../data/site'
 import styles from './Layout.module.css'
 
 type Props = { children: ReactNode }
 
+const SPY_IDS = NAV_ITEMS.map((item) => item.id)
+
 export default function Layout({ children }: Props) {
   const [scrolled, setScrolled] = useState(() => typeof window !== 'undefined' && window.scrollY > 8)
   const [menuOpen, setMenuOpen] = useState(false)
+  const active = useScrollSpy(SPY_IDS)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -55,7 +59,11 @@ export default function Layout({ children }: Props) {
               <ul id="menu-sections" className={styles.navList} data-open={menuOpen}>
                 {NAV_ITEMS.map((item) => (
                   <li key={item.id}>
-                    <a href={`#${item.id}`} onClick={() => setMenuOpen(false)}>
+                    <a
+                      href={`#${item.id}`}
+                      aria-current={active === item.id ? 'location' : undefined}
+                      onClick={() => setMenuOpen(false)}
+                    >
                       {item.label}
                     </a>
                   </li>

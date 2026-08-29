@@ -52,7 +52,9 @@ function Maquette({ still }: { still: boolean }) {
   )
 }
 
-export default function HeroScene({ lowPower = false }: { lowPower?: boolean }) {
+type Props = { lowPower?: boolean; active?: boolean }
+
+export default function HeroScene({ lowPower = false, active = true }: Props) {
   const still =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -63,6 +65,7 @@ export default function HeroScene({ lowPower = false }: { lowPower?: boolean }) 
       dpr={lowPower ? 1 : [1, 2]}
       gl={{ antialias: !lowPower, alpha: true }}
       camera={{ position: [3.6, 2.1, 4.2], fov: 40 }}
+      frameloop={active && !still ? 'always' : 'demand'}
     >
       <ambientLight intensity={0.6} />
       <directionalLight
