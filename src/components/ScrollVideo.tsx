@@ -14,9 +14,9 @@ type Props = {
   label?: string
 }
 
-const TAU = 0.12
-const FPS = 30
-const FALLBACK_DUR = 6
+const TAU = 0.16
+const FPS = 48
+const FALLBACK_DUR = 5
 
 export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98, label }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)

@@ -13,10 +13,10 @@ export const JOURNEY = [
   },
   {
     period: '2019 — 2022',
-    role: 'Arquiteta plena',
-    org: 'Escritório de arquitetura corporativa',
+    role: 'Arquiteta de projetos',
+    org: 'Escritório de projetos de iluminação',
     description:
-      'Projetos executivos de escritórios e varejo, compatibilização com engenharia e gestão de cronograma de obra.',
+      'Projetos luminotécnicos para residências e comércio: cálculo, especificação de luminárias e fitas de LED, e integração da luz ao projeto de arquitetura.',
   },
   {
     period: '2017 — 2019',
