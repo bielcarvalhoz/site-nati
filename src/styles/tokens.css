@@ -1,0 +1,78 @@
+/* Design tokens — "minimalista claro" / vitrine de museu, com espinha de prancheta.
+   Single light theme by intent. Change values here, not in components. */
+:root {
+  /* Surfaces & ink */
+  --bg: #faf9f6;
+  --bg-raised: #ffffff;
+  --bg-sunken: #f2f1ec;
+  --ink: #191917;
+  --ink-soft: #45443f;
+  /* --muted: darkened to clear WCAG AA (>= 4.5:1) on --bg and --bg-sunken.
+     verified in scripts/contrast.mjs */
+  --muted: #5c5a51;
+  --hairline: #e4e2da;
+  /* Faint drafting rule — vertical grid lines at the container edges on desktop. */
+  --rule: rgba(25, 25, 23, 0.07);
+
+  /* One restrained accent — terracotta. Now also present at rest (section index,
+     eyebrow tick), not only on hover/focus. */
+  --accent: #a8572f;
+  --accent-ink: #ffffff;
+
+  /* Typography */
+  --font-display: 'Fraunces Variable', 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --text-xs: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --text-md: clamp(1.15rem, 1.02rem + 0.55vw, 1.4rem);
+  --text-lg: clamp(1.5rem, 1.28rem + 1vw, 2.25rem);
+  --text-xl: clamp(2rem, 1.5rem + 2.4vw, 3.25rem);
+  --text-2xl: clamp(2.75rem, 1.5rem + 5.6vw, 6.5rem);
+  --text-numeral: clamp(3.5rem, 2rem + 7vw, 8rem);
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.28;
+  --leading-normal: 1.62;
+  --tracking-tight: -0.021em;
+  --tracking-mono: 0.08em;
+
+  /* Spacing */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+  --section-py: clamp(4rem, 3rem + 8vw, 9rem);
+  --hero-py: clamp(6rem, 3rem + 16vw, 15rem);
+
+  /* Layout */
+  --container: 72rem;
+  --container-wide: 82rem;
+  --container-narrow: 44rem;
+  --gutter: clamp(1.25rem, 0.5rem + 3.5vw, 3rem);
+  --header-h: 4.5rem;
+
+  /* Depth */
+  --shadow-sm: 0 1px 2px rgba(25, 25, 23, 0.04), 0 2px 8px rgba(25, 25, 23, 0.05);
+  --shadow-md: 0 8px 24px -8px rgba(25, 25, 23, 0.12), 0 4px 10px -6px rgba(25, 25, 23, 0.1);
+  --shadow-vitrine: 0 34px 64px -24px rgba(25, 25, 23, 0.22), 0 14px 28px -16px rgba(25, 25, 23, 0.14);
+
+  /* Motion */
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur: 0.5s;
+  --dur-fast: 0.24s;
+
+  --radius: 3px;
+  --radius-lg: 10px;
+
+  --z-header: 50;
+  --z-menu: 60;
+  --z-dialog: 100;
+}
