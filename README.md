@@ -96,9 +96,13 @@ vira o apartamento conforme você rola. No fim do vídeo o pin solta e o site co
 
 - Em `prefers-reduced-motion` ou tela ≤ 40rem, mostra só `public/hero-poster.jpg` (sem
   pin, sem baixar o vídeo).
-- Trocar o vídeo: gere um MP4 novo, rode o `ffmpeg` abaixo pra deixar os keyframes densos
-  (scrub suave), e substitua `public/hero.mp4` + `public/hero-poster.jpg` (um quadro do
-  fim). Ajuste `scrubVh` em `Hero.tsx` (~40 × duração em segundos).
+- O vídeo atual foi gerado no Kling (Higgsfield) usando uma **planta baixa desenhada
+  como `start_image`**, então as paredes sobem exatamente sobre as linhas da planta.
+  Pra regenerar mantendo essa coerência: desenhe/exporte a planta como imagem e passe
+  como imagem inicial.
+- Trocar o vídeo: gere um MP4 novo, rode o `ffmpeg` abaixo (interpola pra 60fps + deixa
+  os keyframes densos = scrub suave), substitua `public/hero.mp4` + `public/hero-poster.jpg`
+  (um quadro do fim). Ajuste `scrubVh` em `Hero.tsx` (~40 × duração em segundos).
 
 ```bash
 ffmpeg -i entrada.mp4 -an -c:v libx264 -profile:v high -pix_fmt yuv420p \

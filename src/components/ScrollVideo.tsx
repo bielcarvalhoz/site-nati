@@ -15,7 +15,7 @@ type Props = {
 }
 
 const TAU = 0.16
-const FPS = 48
+const FPS = 60
 const FALLBACK_DUR = 5
 
 export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98, label }: Props) {
