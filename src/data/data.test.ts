@@ -4,7 +4,6 @@ import { ACADEMICOS, PROJECTS, REALIZADOS } from './projects'
 import { JOURNEY } from './journey'
 import { SERVICES, TOOLS } from './services'
 import { METRICS } from './metrics'
-import { TESTIMONIALS } from './testimonials'
 import Placeholder from '../components/Placeholder'
 
 const nonEmpty = (s: string) => typeof s === 'string' && s.trim().length > 0
@@ -85,17 +84,6 @@ describe('metrics', () => {
     for (const m of METRICS) {
       expect(nonEmpty(m.value)).toBe(true)
       expect(nonEmpty(m.label)).toBe(true)
-    }
-  })
-})
-
-describe('testimonials', () => {
-  it('are filled quote/author/role triples', () => {
-    expect(TESTIMONIALS.length).toBeGreaterThanOrEqual(3)
-    for (const t of TESTIMONIALS) {
-      expect(nonEmpty(t.quote)).toBe(true)
-      expect(nonEmpty(t.author)).toBe(true)
-      expect(nonEmpty(t.role)).toBe(true)
     }
   })
 })

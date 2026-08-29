@@ -1,0 +1,36 @@
+.hero {
+  padding-block: var(--hero-py) var(--section-py);
+}
+
+.hero h1 {
+  font-size: var(--text-2xl);
+  margin-top: var(--space-md);
+  max-width: 18ch;
+}
+
+.lede {
+  margin-top: var(--space-lg);
+  font-size: var(--text-md);
+  color: var(--ink-soft);
+  max-width: 44ch;
+}
+
+.lead {
+  margin-top: var(--space-md);
+  max-width: 56ch;
+  color: var(--muted);
+}
+
+/* Reserved area for the Step 4 3D scene — keeps the fold height stable now. */
+.stage {
+  margin-top: var(--space-2xl);
+  aspect-ratio: 16 / 7;
+  border: 1px solid var(--hairline);
+  background: linear-gradient(180deg, var(--bg-raised), var(--bg-sunken));
+}
+
+@media (max-width: 40rem) {
+  .stage {
+    aspect-ratio: 4 / 3;
+  }
+}

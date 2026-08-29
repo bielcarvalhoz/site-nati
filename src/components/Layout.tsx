@@ -42,6 +42,7 @@ export default function Layout({ children }: Props) {
             <button
               type="button"
               className={styles.menuToggle}
+              aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={menuOpen}
               aria-controls="menu-sections"
               onClick={() => setMenuOpen((v) => !v)}

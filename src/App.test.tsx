@@ -38,8 +38,9 @@ it('points the skip link at the main landmark', () => {
 
 it('toggles the mobile menu open and closed', () => {
   render(<App />)
-  // the toggle is display:none above 46rem (jsdom viewport is wide); it's the only button
-  const toggle = screen.getByRole('button', { hidden: true })
+  // the toggle is display:none above 46rem; name-matching on hidden nodes is unreliable,
+  // so target it by the aria-controls relationship it really has
+  const toggle = document.querySelector<HTMLButtonElement>('button[aria-controls="menu-sections"]')!
   const list = document.getElementById('menu-sections')
   expect(toggle).toHaveAttribute('aria-expanded', 'false')
   expect(list).toHaveAttribute('data-open', 'false')

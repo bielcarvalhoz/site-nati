@@ -7,7 +7,6 @@ import { chromium } from 'playwright'
 const BASE = process.argv[2] ?? 'http://localhost:4173'
 const OUT = 'screenshots'
 
-const ROUTES = [{ name: 'home', path: '/' }]
 const VIEWPORTS = [
   { label: 'desktop', width: 1440, height: 900 },
   { label: 'mobile', width: 390, height: 844 },
@@ -30,14 +29,19 @@ for (const vp of VIEWPORTS) {
     if (m.type() === 'error') problems.push(`[${vp.label}] console.error: ${m.text()}`)
   })
 
-  for (const route of ROUTES) {
-    await page.goto(BASE + route.path, { waitUntil: 'networkidle' })
-    await page.evaluate(() => document.fonts.ready)
-    await page.waitForTimeout(400)
-    const file = `${OUT}/${route.name}-${vp.label}.png`
-    await page.screenshot({ path: file, fullPage: true })
-    console.log('saved', file)
-  }
+  await page.goto(BASE, { waitUntil: 'networkidle' })
+  await page.evaluate(() => document.fonts.ready)
+  await page.waitForTimeout(400)
+  await page.screenshot({ path: `${OUT}/home-${vp.label}.png`, fullPage: true })
+  console.log('saved', `${OUT}/home-${vp.label}.png`)
+
+  // open the first project card and capture the dialog
+  const firstCard = page.locator('#projetos ul button').first()
+  await firstCard.click()
+  await page.waitForTimeout(300)
+  await page.screenshot({ path: `${OUT}/dialog-${vp.label}.png` })
+  console.log('saved', `${OUT}/dialog-${vp.label}.png`)
+
   await ctx.close()
 }
 

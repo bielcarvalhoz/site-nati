@@ -71,10 +71,3 @@ export type Metric = {
   value: string
   label: string
 }
-
-export type Testimonial = {
-  quote: string
-  author: string
-  /** "Cliente — reforma residencial, Pinheiros". */
-  role: string
-}
