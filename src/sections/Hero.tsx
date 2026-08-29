@@ -12,66 +12,78 @@ import { TOP_ID } from '../lib/nav'
 import styles from './Hero.module.css'
 
 const HeroScene = lazy(() => import('../three/HeroScene'))
+const POSTER = '/hero-poster.jpg'
 
-/** off = no WebGL (poster only) · static = reduced motion (built house, no anim)
- *  low = small screen (lighter render) · full = animated, scroll-assembled */
-type SceneMode = 'off' | 'static' | 'low' | 'full'
+/** off = no WebGL · low = small screen · static = reduced motion · full = animated */
+type SceneMode = 'off' | 'low' | 'static' | 'full'
 
 function hasWebGL(): boolean {
   try {
     const c = document.createElement('canvas')
-    return !!(c.getContext('webgl2') || c.getContext('webgl'))
+    const gl = c.getContext('webgl2') ?? c.getContext('webgl')
+    gl?.getExtension('WEBGL_lose_context')?.loseContext()
+    return !!gl
   } catch {
     return false
   }
 }
 
-class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+class SceneBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { failed: boolean }> {
   state = { failed: false }
   static getDerivedStateFromError() {
     return { failed: true }
   }
   render() {
-    return this.state.failed ? null : this.props.children
+    return this.state.failed ? this.props.fallback : this.props.children
   }
+}
+
+function Poster() {
+  return <img className={styles.poster} src={POSTER} alt="" aria-hidden="true" />
 }
 
 export default function Hero() {
   const [mode, setMode] = useState<SceneMode>('off')
-  const stageRef = useRef<HTMLDivElement>(null)
+  const [scrolledOnce, setScrolledOnce] = useState(false)
   const progressRef = useRef(0)
-  const [onScreen, setOnScreen] = useState(true)
 
-  // decide scene mode once, after first paint
+  // scene mode — decided after first paint, and kept in sync with the two media queries
   useEffect(() => {
     if (!hasWebGL()) return // stays 'off'
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const small = window.matchMedia('(max-width: 40rem)').matches
-    // oxlint-disable-next-line react/set-state-in-effect -- syncing to browser capabilities, post-paint by design
-    setMode(reduced ? 'static' : small ? 'low' : 'full')
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const narrow = window.matchMedia('(max-width: 40rem)')
+    const resolve = () => setMode(narrow.matches ? 'low' : motion.matches ? 'static' : 'full')
+    resolve()
+    motion.addEventListener('change', resolve)
+    narrow.addEventListener('change', resolve)
+    return () => {
+      motion.removeEventListener('change', resolve)
+      narrow.removeEventListener('change', resolve)
+    }
   }, [])
 
-  // scroll progress across the first ~85vh drives the house assembly
+  // start at the top on reload so the assembly plays from the plan, not mid-air
+  useEffect(() => {
+    const prev = history.scrollRestoration
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    return () => {
+      if ('scrollRestoration' in history) history.scrollRestoration = prev
+    }
+  }, [])
+
+  // scroll → assembly progress (completes after ~one viewport of scrolling)
   useEffect(() => {
     const onScroll = () => {
-      const span = window.innerHeight * 0.85
+      const span = window.innerHeight || 1
       progressRef.current = Math.min(1, Math.max(0, window.scrollY / span))
+      if (window.scrollY > 4) setScrolledOnce(true)
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // pause rendering when the stage is scrolled away
-  useEffect(() => {
-    const el = stageRef.current
-    if (!el || typeof IntersectionObserver === 'undefined') return
-    const io = new IntersectionObserver((entries) => setOnScreen(!!entries[0]?.isIntersecting), {
-      threshold: 0.05,
-    })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
+  const live = mode === 'full' || mode === 'static'
 
   return (
     <section id={TOP_ID} className={`container ${styles.hero}`} aria-label="Apresentação">
@@ -80,18 +92,20 @@ export default function Hero() {
       <p className={styles.lede}>{SITE.tagline}</p>
       <p className={styles.lead}>{SITE.heroLead}</p>
 
-      <div ref={stageRef} className={styles.stage} aria-hidden="true">
-        {mode !== 'off' ? (
-          <SceneBoundary>
-            <Suspense fallback={null}>
-              <HeroScene
-                progress={progressRef}
-                lowPower={mode === 'low'}
-                still={mode === 'static'}
-                active={onScreen}
-              />
+      <div className={styles.stage}>
+        {live ? (
+          <SceneBoundary fallback={<Poster />}>
+            <Suspense fallback={<Poster />}>
+              <HeroScene progress={progressRef} still={mode === 'static'} />
             </Suspense>
           </SceneBoundary>
+        ) : (
+          <Poster />
+        )}
+        {mode === 'full' ? (
+          <span className={styles.cue} data-hidden={scrolledOnce}>
+            role para montar o espaço
+          </span>
         ) : null}
       </div>
     </section>
