@@ -50,7 +50,7 @@
   --space-3xl: 6rem;
   --space-4xl: 9rem;
   --section-py: clamp(3.5rem, 2.5rem + 6vw, 7rem);
-  --hero-py: clamp(5rem, 3rem + 12vw, 11rem);
+  --hero-py: clamp(1.25rem, 0.5rem + 3vw, 3rem);
 
   /* Layout */
   --container: 72rem;
