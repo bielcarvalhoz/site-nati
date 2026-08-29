@@ -21,13 +21,22 @@
   color: var(--muted);
 }
 
-/* Reserved area for the Step 4 3D scene. Kept low-key so it doesn't read as a
-   broken image before the scene lands. */
+/* Holds the 3D scene; the gradient is the poster shown until (or instead of) it. */
 .stage {
+  position: relative;
   margin-top: var(--space-2xl);
   aspect-ratio: 21 / 9;
   border-top: 1px solid var(--hairline);
   background: radial-gradient(120% 140% at 50% 0%, var(--bg-raised), var(--bg) 70%);
+}
+.stage > * {
+  position: absolute;
+  inset: 0;
+}
+.stage canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 @media (max-width: 40rem) {
