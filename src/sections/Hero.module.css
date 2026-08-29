@@ -1,5 +1,5 @@
 .hero {
-  padding-block: var(--hero-py) var(--section-py);
+  padding-block: var(--hero-py) var(--space-lg);
 }
 
 /* Settle-in on first load. Guarded — reduced-motion gets it instantly. */
@@ -38,52 +38,4 @@
   max-width: 52ch;
   font-size: var(--text-sm);
   color: var(--muted);
-}
-
-/* Holds the 3D scene (or its poster). Flat surface — no gradient. */
-.stage {
-  position: relative;
-  margin-top: var(--space-xl);
-  aspect-ratio: 16 / 10;
-  border-top: 1px solid var(--hairline);
-  background: var(--bg-sunken);
-  overflow: hidden;
-}
-.stage > div,
-.poster {
-  position: absolute;
-  inset: 0;
-}
-.stage canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-.poster {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.cue {
-  position: absolute;
-  left: 50%;
-  bottom: var(--space-md);
-  transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-mono);
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: opacity var(--dur) var(--ease);
-}
-.cue[data-hidden='true'] {
-  opacity: 0;
-}
-
-@media (max-width: 40rem) {
-  .stage {
-    aspect-ratio: 4 / 5;
-  }
 }

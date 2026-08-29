@@ -28,9 +28,17 @@ body {
 img,
 picture,
 svg,
-canvas {
+canvas,
+video {
   display: block;
   max-width: 100%;
+}
+
+/* Lets the hero's full-bleed sticky stage break out of the column without a
+   horizontal scrollbar. `clip` (not `hidden`) does NOT create a scroll
+   container, so it doesn't break `position: sticky` inside. */
+main {
+  overflow-x: clip;
 }
 
 input,

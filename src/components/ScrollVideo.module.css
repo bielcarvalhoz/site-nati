@@ -1,0 +1,71 @@
+/* Full-bleed scroll-length wrapper. Its height is one pinned screen plus the
+   distance spent scrubbing. */
+.wrap {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  --scrub: 200svh;
+  height: calc(100svh + var(--scrub));
+}
+@supports not (height: 100svh) {
+  .wrap {
+    --scrub: 200vh;
+    height: calc(100vh + var(--scrub));
+  }
+}
+
+/* The pinned frame. `overflow: hidden` is safe here — no sticky descendants. */
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--bg-sunken);
+  isolation: isolate;
+}
+@supports not (height: 100svh) {
+  .stage {
+    height: 100vh;
+  }
+}
+
+.media,
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Drafting-sheet title block — decorative signature, lower-left. */
+.plate {
+  position: absolute;
+  left: var(--gutter);
+  bottom: var(--space-lg);
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Poster-only fallback (reduced motion / small screen / no video). */
+.still {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center;
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--hairline);
+  background: var(--bg-sunken);
+}
+@media (max-width: 40rem) {
+  .still {
+    aspect-ratio: 4 / 5;
+  }
+}

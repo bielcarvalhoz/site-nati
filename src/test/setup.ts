@@ -19,6 +19,13 @@ if (!g.matchMedia) {
     }) as unknown as MediaQueryList
 }
 
+// jsdom leaves <video> media methods unimplemented (they throw "Not implemented").
+if (typeof HTMLMediaElement !== 'undefined') {
+  HTMLMediaElement.prototype.load = () => {}
+  HTMLMediaElement.prototype.play = () => Promise.resolve()
+  HTMLMediaElement.prototype.pause = () => {}
+}
+
 // jsdom leaves <dialog> open/close unimplemented — make them track the `open` prop.
 if (typeof HTMLDialogElement !== 'undefined' && !HTMLDialogElement.prototype.showModal) {
   HTMLDialogElement.prototype.showModal = function showModal() {
