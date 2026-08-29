@@ -10,6 +10,15 @@
   max-width: 46ch;
 }
 
+.channelsLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--space-sm);
+}
+
 .channels {
   list-style: none;
   padding: 0;

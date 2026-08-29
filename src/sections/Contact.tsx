@@ -2,6 +2,7 @@ import { SITE } from '../data/site'
 import { SECTION, titleIdFor } from '../lib/nav'
 import { isHttps } from '../lib/url'
 import SectionHead from '../components/SectionHead'
+import ContactForm from './ContactForm'
 import styles from './Contact.module.css'
 
 export default function Contact() {
@@ -19,40 +20,45 @@ export default function Contact() {
           mente. Respondo pessoalmente em até dois dias úteis.
         </p>
 
-        <ul className={styles.channels}>
-          <li>
-            <a className={styles.channel} href={`mailto:${SITE.email}`}>
-              <span className={styles.channelLabel}>E-mail</span>
-              <span className={styles.channelValue}>{SITE.email}</span>
-            </a>
-          </li>
-          {SITE.whatsapp ? (
+        <ContactForm />
+
+        <div>
+          <p className={styles.channelsLabel}>Ou fale direto</p>
+          <ul className={styles.channels}>
             <li>
-              <a
-                className={styles.channel}
-                href={`https://wa.me/${SITE.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className={styles.channelLabel}>WhatsApp</span>
-                <span className={styles.channelValue}>Mandar mensagem</span>
+              <a className={styles.channel} href={`mailto:${SITE.email}`}>
+                <span className={styles.channelLabel}>E-mail</span>
+                <span className={styles.channelValue}>{SITE.email}</span>
               </a>
             </li>
-          ) : null}
-          {isHttps(SITE.instagram) ? (
-            <li>
-              <a
-                className={styles.channel}
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className={styles.channelLabel}>Instagram</span>
-                <span className={styles.channelValue}>Ver trabalhos recentes</span>
-              </a>
-            </li>
-          ) : null}
-        </ul>
+            {SITE.whatsapp ? (
+              <li>
+                <a
+                  className={styles.channel}
+                  href={`https://wa.me/${SITE.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className={styles.channelLabel}>WhatsApp</span>
+                  <span className={styles.channelValue}>Mandar mensagem</span>
+                </a>
+              </li>
+            ) : null}
+            {isHttps(SITE.instagram) ? (
+              <li>
+                <a
+                  className={styles.channel}
+                  href={SITE.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className={styles.channelLabel}>Instagram</span>
+                  <span className={styles.channelValue}>Ver trabalhos recentes</span>
+                </a>
+              </li>
+            ) : null}
+          </ul>
+        </div>
       </div>
     </section>
   )

@@ -1,0 +1,94 @@
+.form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 34rem;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  color: var(--ink);
+  font-size: var(--text-base);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.input:focus,
+.textarea:focus {
+  border-color: var(--ink);
+  outline: none;
+}
+.input[aria-invalid='true'],
+.textarea[aria-invalid='true'] {
+  border-color: var(--accent);
+}
+.textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* honeypot — visually and semantically hidden from people, visible to bots */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.submit {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0.7rem 1.5rem;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+.submit:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.status {
+  font-size: var(--text-sm);
+}
+.status[data-tone='ok'] {
+  color: var(--ink);
+}
+.status[data-tone='error'] {
+  color: var(--accent);
+}
+
+.success {
+  border: 1px solid var(--hairline);
+  border-left: 2px solid var(--accent);
+  padding: var(--space-lg);
+  max-width: 34rem;
+}
+.success p {
+  color: var(--ink-soft);
+}
