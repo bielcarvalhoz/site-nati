@@ -88,11 +88,24 @@ mostra um erro e o visitante cai nos links de e-mail / WhatsApp.
 
 ---
 
-## Cena 3D
+## Hero em vídeo
 
-`src/three/HeroScene.tsx`. Carrega em _chunk_ separado (não trava o primeiro paint) e
-se desliga sozinho quando: o visitante prefere menos animação, não há WebGL, ou a tela
-é pequena (nesse caso roda uma versão leve). Fora da tela, para de renderizar.
+`src/components/ScrollVideo.tsx`. O topo é um `<video>` (`public/hero.mp4`) que fica
+**fixo** por uma tela enquanto o scroll controla o `currentTime` — a planta na prancheta
+vira o apartamento conforme você rola. No fim do vídeo o pin solta e o site continua.
+
+- Em `prefers-reduced-motion` ou tela ≤ 40rem, mostra só `public/hero-poster.jpg` (sem
+  pin, sem baixar o vídeo).
+- Trocar o vídeo: gere um MP4 novo, rode o `ffmpeg` abaixo pra deixar os keyframes densos
+  (scrub suave), e substitua `public/hero.mp4` + `public/hero-poster.jpg` (um quadro do
+  fim). Ajuste `scrubVh` em `Hero.tsx` (~40 × duração em segundos).
+
+```bash
+ffmpeg -i entrada.mp4 -an -c:v libx264 -profile:v high -pix_fmt yuv420p \
+  -g 4 -keyint_min 4 -sc_threshold 0 -preset slow -crf 20 \
+  -movflags +faststart public/hero.mp4
+ffmpeg -ss <seg> -i entrada.mp4 -frames:v 1 -vf scale=1600:-2 -q:v 4 public/hero-poster.jpg
+```
 
 ---
 
