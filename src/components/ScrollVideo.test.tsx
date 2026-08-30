@@ -38,9 +38,8 @@ it('falls back to a still image under reduced motion', () => {
   expect(img).toHaveAttribute('src', '/p.jpg')
 })
 
-it('falls back to a still image on small screens', () => {
+it('still pins on small screens (mobile gets the scrub too)', () => {
   set('(max-width: 40rem)', true)
   const { container } = render(<ScrollVideo src="/x.mp4" poster="/p.jpg" />)
-  expect(container.querySelector('video')).not.toBeInTheDocument()
-  expect(container.querySelector('img')).toBeInTheDocument()
+  expect(container.querySelector('video')).toBeInTheDocument()
 })

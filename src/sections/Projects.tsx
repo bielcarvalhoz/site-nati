@@ -86,46 +86,47 @@ export default function Projects() {
         }}
       >
         {selected ? (
-          <div className={styles.dialogScroll}>
+          <>
             <button type="button" className={styles.dialogClose} onClick={close} aria-label="Fechar">
               ✕
             </button>
-
-            {selected.gallery && selected.gallery.length > 0 ? (
-              <div className={styles.gallery}>
-                {selected.gallery.map((src) => (
-                  <img key={src} src={src} alt={`${selected.title} — imagem`} />
-                ))}
-              </div>
-            ) : (
-              <div className={styles.dialogMedia}>
-                <ProjectImage project={selected} />
-              </div>
-            )}
-
-            <div className={styles.dialogBody}>
-              <p className="eyebrow">Projeto acadêmico</p>
-              <h3 id={DIALOG_TITLE_ID} className={styles.dialogTitle}>
-                {selected.title}
-              </h3>
-              <div className={styles.dialogTags}>
-                <span>{selected.year}</span>
-                <span>{selected.discipline}</span>
-                {selected.location ? <span>{selected.location}</span> : null}
-                {selected.area ? <span>{selected.area}</span> : null}
-              </div>
-              <div className={styles.dialogText}>
-                <div>
-                  <h4>Contexto</h4>
-                  <p>{selected.context}</p>
+            <div className={styles.dialogScroll}>
+              {selected.gallery && selected.gallery.length > 0 ? (
+                <div className={styles.gallery}>
+                  {selected.gallery.map((src) => (
+                    <img key={src} src={src} alt={`${selected.title} — imagem`} />
+                  ))}
                 </div>
-                <div>
-                  <h4>Partido</h4>
-                  <p>{selected.solution}</p>
+              ) : (
+                <div className={styles.dialogMedia}>
+                  <ProjectImage project={selected} />
+                </div>
+              )}
+
+              <div className={styles.dialogBody}>
+                <p className="eyebrow">Projeto acadêmico</p>
+                <h3 id={DIALOG_TITLE_ID} className={styles.dialogTitle}>
+                  {selected.title}
+                </h3>
+                <div className={styles.dialogTags}>
+                  <span>{selected.year}</span>
+                  <span>{selected.discipline}</span>
+                  {selected.location ? <span>{selected.location}</span> : null}
+                  {selected.area ? <span>{selected.area}</span> : null}
+                </div>
+                <div className={styles.dialogText}>
+                  <div>
+                    <h4>Contexto</h4>
+                    <p>{selected.context}</p>
+                  </div>
+                  <div>
+                    <h4>Partido</h4>
+                    <p>{selected.solution}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </>
         ) : null}
       </dialog>
     </section>

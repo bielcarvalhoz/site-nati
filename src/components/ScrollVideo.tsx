@@ -26,18 +26,13 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
   const videoRef = useRef<HTMLVideoElement>(null)
   const [pinned, setPinned] = useState(false)
 
-  // pin only with motion allowed and room to work; live with the media queries
+  // pin whenever motion is allowed — desktop and mobile alike; live with the query
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const small = window.matchMedia('(max-width: 40rem)')
-    const resolve = () => setPinned(!reduce.matches && !small.matches)
+    const resolve = () => setPinned(!reduce.matches)
     resolve()
     reduce.addEventListener('change', resolve)
-    small.addEventListener('change', resolve)
-    return () => {
-      reduce.removeEventListener('change', resolve)
-      small.removeEventListener('change', resolve)
-    }
+    return () => reduce.removeEventListener('change', resolve)
   }, [])
 
   // start reloads at the top so the clip plays from its first frame

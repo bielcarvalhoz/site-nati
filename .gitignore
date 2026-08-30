@@ -31,3 +31,5 @@ src/assets/portfolio-antigo.pdf
 
 # grafo local do graphify (ferramenta de navegação, não é entregável)
 graphify-out/
+
+tmp-pdf-pages/

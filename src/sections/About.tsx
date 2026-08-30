@@ -1,6 +1,5 @@
 import { SITE } from '../data/site'
 import { SECTION, titleIdFor } from '../lib/nav'
-import Placeholder from '../components/Placeholder'
 import SectionHead from '../components/SectionHead'
 import styles from './About.module.css'
 
@@ -20,7 +19,7 @@ export default function About() {
 
       <div className={styles.layout}>
         <div className={styles.portrait}>
-          <Placeholder seed={SITE.fullName} label={SITE.fullName} />
+          <img src="/natalia.jpg" alt={SITE.fullName} loading="lazy" />
         </div>
         <div className={styles.prose}>
           {SITE.about.map((paragraph) => (

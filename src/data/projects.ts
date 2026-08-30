@@ -19,6 +19,12 @@ export const PROJECTS = [
       'Projeto da disciplina de Projeto de Ambientes e Interiores. As mudanças precisavam preservar a personalidade e o bem-estar dos moradores, e abrir espaço para um escritório com privacidade e isolamento acústico — resolvido no quarto mais afastado da área social, que também recebe os hóspedes.',
     solution:
       'Área social em conceito aberto, integrando cozinha, sala de jantar e sala de estar, para que a anfitriã interaja com os convidados mesmo cozinhando. Parte da adega passa a despensa no antigo quarto de serviço; a cozinha, de frente para ela, ganha armários e prateleiras até o teto. Detalhamento de marcenaria e vistas 1:20 de banheiro e cozinha, mais renderizações de todos os ambientes.',
+    cover: '/projetos/casa-raiza-costa/cover.jpg',
+    gallery: [
+      '/projetos/casa-raiza-costa/cover.jpg',
+      '/projetos/casa-raiza-costa/02.jpg',
+      '/projetos/casa-raiza-costa/03.jpg',
+    ],
   },
   {
     id: 'edificio-cdhu',
@@ -32,6 +38,8 @@ export const PROJECTS = [
       'Projeto da disciplina de Materiais, Técnicas e Tecnologias de Construção. O terreno é irregular e em aclive, e o projeto precisa atender à Lei Municipal nº 13.885/04 (recuo mínimo de 5 m) e garantir acessibilidade.',
     solution:
       'Plantas espelhadas para aproveitar a área e simplificar execução e manutenção. Os blocos são desalinhados para minimizar cortes no solo e os conjuntos, elevados 3 m em relação à rua. Quadra e playground vão para a frente do terreno, pela luz natural; uma plataforma elevatória ao lado da escada resolve o acesso.',
+    cover: '/projetos/edificio-cdhu/cover.jpg',
+    gallery: ['/projetos/edificio-cdhu/cover.jpg', '/projetos/edificio-cdhu/02.jpg'],
   },
   {
     id: 'pavilhao-exposicoes',
@@ -46,6 +54,12 @@ export const PROJECTS = [
       'Projeto da disciplina de Sistemas Estruturais e Construtivos. O terreno de esquina fica entre a Rua Melo Peixoto e a Rua Dr. Coryntho Baldoíno Costa, a um quarteirão do Metrô Carrão.',
     solution:
       'Uma passarela coberta em aço treliçado (15 × 5 m) liga o metrô ao centro expositivo, com catracas de controle na chegada. A estrutura combina viga vagão, viga treliçada, cabos de aço e concreto armado, com vedações em vidro laminado temperado.',
+    cover: '/projetos/pavilhao-exposicoes/cover.jpg',
+    gallery: [
+      '/projetos/pavilhao-exposicoes/cover.jpg',
+      '/projetos/pavilhao-exposicoes/02.jpg',
+      '/projetos/pavilhao-exposicoes/03.jpg',
+    ],
   },
   {
     id: 'studio-pinheiros',
@@ -60,6 +74,8 @@ export const PROJECTS = [
       'Projeto da disciplina de Realidade Contemporânea. Em 24 m², o mesmo espaço precisa servir bem ao trabalho e à vida cotidiana, com conversão fácil entre os dois usos.',
     solution:
       'Móveis inteligentes, retráteis e multifuncionais liberam área ao longo do dia. Em vez de um canto fixo de home office, o posto de trabalho se distribui pela habitação. Os ambientes de descanso e convívio são desenhados para promover calma e bem-estar.',
+    cover: '/projetos/studio-pinheiros/cover.jpg',
+    gallery: ['/projetos/studio-pinheiros/cover.jpg'],
   },
   {
     id: 'escola-sao-francisco-do-sul',
@@ -73,6 +89,12 @@ export const PROJECTS = [
       'Projeto da disciplina de Conforto Ambiental. O ponto de partida foi o estudo do terreno e do clima de São Francisco do Sul (SC), com cartas solares e rosa dos ventos.',
     solution:
       'Brises e cobogós adaptam o conforto ao longo do dia. Três blocos — administrativo, serviço e pedagógico — se conectam ao refeitório, no centro. A parede de cobogós é o elemento de destaque: sombreia as salas de aula e dá identidade ao conjunto.',
+    cover: '/projetos/escola-sao-francisco-do-sul/cover.jpg',
+    gallery: [
+      '/projetos/escola-sao-francisco-do-sul/cover.jpg',
+      '/projetos/escola-sao-francisco-do-sul/02.jpg',
+      '/projetos/escola-sao-francisco-do-sul/03.jpg',
+    ],
   },
   {
     id: 'his-hmp-mooca',
@@ -87,5 +109,11 @@ export const PROJECTS = [
       'Projeto da disciplina de Projeto de Habitação. A gleba de cerca de 10.811 m² fica entre as ruas dos Trilhos, Telmo Giolito Porto e Bresser, na Mooca (SP).',
     solution:
       'Quatro torres posicionadas por análise climática, uma rua interna compartilhada com prioridade a pedestres e ciclistas, galeria de arte e praça central. O térreo é ativo, com lojas e comércio abertos ao público, e a entrada dos moradores tem portaria controlada.',
+    cover: '/projetos/his-hmp-mooca/cover.jpg',
+    gallery: [
+      '/projetos/his-hmp-mooca/cover.jpg',
+      '/projetos/his-hmp-mooca/02.jpg',
+      '/projetos/his-hmp-mooca/03.jpg',
+    ],
   },
 ] as const satisfies readonly Project[]

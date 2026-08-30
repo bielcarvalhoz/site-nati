@@ -65,6 +65,7 @@
   /* the global `* { margin: 0 }` reset kills the UA `dialog:modal { margin: auto }`
      that centres a modal — put it back */
   margin: auto;
+  position: relative; /* anchor for the close button, so it stays put while the body scrolls */
   width: min(52rem, calc(100vw - 2 * var(--gutter)));
   max-height: min(90dvh, 48rem);
   padding: 0;
@@ -115,6 +116,7 @@
 }
 .dialogClose {
   position: absolute;
+  z-index: 2;
   top: var(--space-sm);
   right: var(--space-sm);
   width: 44px;

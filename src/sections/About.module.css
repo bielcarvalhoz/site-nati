@@ -17,11 +17,14 @@
   border: 1px solid var(--hairline);
   background: var(--bg-sunken);
   max-width: 18rem;
+  overflow: hidden;
 }
-.portrait svg {
+.portrait svg,
+.portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
 }
 
 .prose {
