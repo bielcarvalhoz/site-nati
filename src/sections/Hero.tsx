@@ -17,6 +17,7 @@ export default function Hero() {
         src="/hero.mp4"
         poster="/hero-poster.jpg"
         scrubVh={200}
+        plate={`${SITE.fullName} · ${SITE.role}`}
         label="Um desenho técnico numa prancheta se transforma, traço a traço, num apartamento mobiliado e decorado."
       />
     </>

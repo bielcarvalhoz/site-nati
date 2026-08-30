@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { createElement } from 'react'
-import { ACADEMICOS, PROJECTS, REALIZADOS } from './projects'
+import { PROJECTS } from './projects'
 import { JOURNEY } from './journey'
 import { SERVICES, TOOLS } from './services'
 import { METRICS } from './metrics'
@@ -17,10 +17,9 @@ describe('projects', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('have a valid category, plausible year, and filled outcome copy', () => {
+  it('have a plausible year and filled outcome copy', () => {
     const thisYear = new Date().getFullYear()
     for (const p of PROJECTS) {
-      expect(['realizado', 'academico']).toContain(p.category)
       expect(p.year).toBeGreaterThanOrEqual(2000)
       expect(p.year).toBeLessThanOrEqual(thisYear)
       expect(nonEmpty(p.title)).toBe(true)
@@ -41,10 +40,8 @@ describe('projects', () => {
     }
   })
 
-  it('has enough built and academic work to fill both blocks', () => {
-    expect(REALIZADOS.length).toBeGreaterThanOrEqual(6)
-    expect(ACADEMICOS.length).toBeGreaterThanOrEqual(3)
-    expect(REALIZADOS.length + ACADEMICOS.length).toBe(PROJECTS.length)
+  it('has enough projects to fill the grid', () => {
+    expect(PROJECTS.length).toBeGreaterThanOrEqual(4)
   })
 })
 
@@ -84,8 +81,8 @@ describe('site contact values', () => {
     if (SITE.whatsapp !== undefined) expect(SITE.whatsapp).toMatch(/^\d+$/)
   })
 
-  it('instagram, if set, is an https URL', () => {
-    if (SITE.instagram !== undefined) expect(SITE.instagram.startsWith('https://')).toBe(true)
+  it('linkedin, if set, is an https URL', () => {
+    if (SITE.linkedin !== undefined) expect(SITE.linkedin.startsWith('https://')).toBe(true)
   })
 })
 

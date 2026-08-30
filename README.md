@@ -29,15 +29,16 @@ npm run dev        # localhost:5173
 ## Editar o conteúdo
 
 Todo o texto e os dados ficam em **`src/data/`** — não há texto fixo nos componentes.
-Procure por `// TODO trocar` para achar tudo que ainda é fictício.
+Os dados vêm do portfólio/currículo dela (`src/assets/portfolio-antigo.pdf`, fora do
+versionamento). Procure por `TODO` para o que ainda falta confirmar.
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| `site.ts` | nome, título, frase do topo, textos do "Sobre", e-mail, telefone, WhatsApp, Instagram, CAU, cidade |
-| `projects.ts` | lista de projetos (realizados e acadêmicos) |
-| `journey.ts` | linha do tempo profissional |
-| `services.ts` | serviços oferecidos + lista de ferramentas |
-| `metrics.ts` | números do "Trajetória" (devem bater com a linha do tempo) |
+| `site.ts` | nome, título, frase do topo, textos do "Sobre", e-mail, telefone, WhatsApp, LinkedIn, cidade |
+| `projects.ts` | os 6 projetos autorais do curso |
+| `journey.ts` | linha do tempo (formação + estágios) |
+| `services.ts` | competências (`SERVICES`) + softwares (`TOOLS`) |
+| `metrics.ts` | números da "Trajetória" |
 
 ### Adicionar um projeto
 
@@ -48,17 +49,16 @@ Em `src/data/projects.ts`, acrescente um objeto ao array `PROJECTS`:
   id: 'nome-curto-sem-espaco',          // único
   title: 'Nome do projeto',
   year: 2024,
-  category: 'realizado',                // 'realizado' | 'academico'
-  discipline: 'Residencial · Interiores',
+  discipline: 'Interiores · residencial',
   location: 'São Paulo, SP',            // opcional
   area: '120 m²',                       // opcional
   summary: 'Uma linha para o card.',
-  context: 'O problema / o briefing.',
+  context: 'O contexto / a disciplina.',
   solution: 'O partido — a ideia de projeto.',
 },
 ```
 
-O card e o detalhe (no `<dialog>`) aparecem sozinhos, no filtro certo.
+O card e o detalhe (no `<dialog>`) aparecem sozinhos.
 
 ### Colocar fotos reais
 
@@ -129,9 +129,10 @@ A Vercel detecta o Vite automaticamente (`npm run build` → `dist/`).
 
 ---
 
-## Ainda pendente (fictício)
+## Ainda pendente
 
-- nome completo já confirmado; **e-mail, telefone, WhatsApp, Instagram, CAU** são placeholder
-- **escritórios e datas** da trajetória são genéricos — trocar pelos reais
-- **números** de `metrics.ts` são estimativa — ajustar e conferir contra a linha do tempo
-- **fotos** dos projetos — todos usam placeholder
+- **escritório atual** dela na trajetória (`journey.ts`) entra como "Escritório de
+  arquitetura" — falta o nome
+- **fotos/pranchas** dos projetos — todos usam placeholder; exportar do PDF e plugar
+  em `cover`/`gallery` (ver "Colocar fotos reais")
+- confirmar com ela o texto do "Sobre" e a frase do topo (`site.ts`)

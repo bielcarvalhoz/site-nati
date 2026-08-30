@@ -44,16 +44,16 @@ export default function Contact() {
                 </a>
               </li>
             ) : null}
-            {isHttps(SITE.instagram) ? (
+            {isHttps(SITE.linkedin) ? (
               <li>
                 <a
                   className={styles.channel}
-                  href={SITE.instagram}
+                  href={SITE.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className={styles.channelLabel}>Instagram</span>
-                  <span className={styles.channelValue}>Ver trabalhos recentes</span>
+                  <span className={styles.channelLabel}>LinkedIn</span>
+                  <span className={styles.channelValue}>Ver perfil</span>
                 </a>
               </li>
             ) : null}

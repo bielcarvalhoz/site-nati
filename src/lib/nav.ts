@@ -28,5 +28,5 @@ export const NAV_ITEMS = [
   { id: SECTION.projetos, label: 'Projetos' },
   { id: SECTION.trajetoria, label: 'Trajetória' },
   { id: SECTION.sobre, label: 'Sobre' },
-  { id: SECTION.servicos, label: 'Serviços' },
+  { id: SECTION.servicos, label: 'Competências' },
 ] as const satisfies readonly NavItem[]

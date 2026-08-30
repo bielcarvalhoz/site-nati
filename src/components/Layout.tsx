@@ -98,13 +98,12 @@ export default function Layout({ children }: Props) {
               </a>
             )}
             <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-            {isHttps(SITE.instagram) && (
-              <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">
-                Instagram
+            {isHttps(SITE.linkedin) && (
+              <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn
               </a>
             )}
             <a href={`#${TOP_ID}`}>Voltar ao topo ↑</a>
-            {SITE.cau && <span className={styles.muted}>{SITE.cau}</span>}
           </div>
         </div>
         <div className={styles.footerLegal}>

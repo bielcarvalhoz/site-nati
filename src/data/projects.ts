@@ -1,148 +1,91 @@
 import type { Project } from './types'
 
-/* Portfólio. Conteúdo fictício para a primeira versão — trocar por projetos reais.
-   Para plugar um projeto real: preencha os textos e aponte `cover` / `gallery` para
-   imagens em src/assets/ (ex.: '/src/assets/ape-vila-mariana/cover.jpg'). Sem `cover`,
-   o site desenha um placeholder determinístico a partir do `id`.
-   TODO trocar: todos os itens abaixo. */
+/* Projetos autorais do curso de Arquitetura e Urbanismo (São Judas Tadeu).
+   Fonte: src/assets/portfolio-antigo.pdf. Ordem = curadoria do próprio portfólio.
+   Sem `cover`/`gallery` o site desenha um placeholder determinístico a partir do `id`;
+   para usar imagens reais, exporte as pranchas/renders para src/assets/<id>/ e aponte
+   `cover` e `gallery` para elas. */
 export const PROJECTS = [
   {
-    id: 'apartamento-vila-mariana',
-    title: 'Apartamento Vila Mariana',
+    id: 'casa-raiza-costa',
+    title: 'Casa Raíza Costa',
     year: 2023,
-    category: 'realizado',
-    discipline: 'Residencial · Interiores',
-    location: 'São Paulo, SP',
-    area: '78 m²',
-    summary: 'Reforma integral de um apartamento dos anos 1980 para um casal que trabalha em casa.',
+    discipline: 'Interiores · residencial',
+    location: 'Higienópolis, São Paulo',
+    area: '270 m²',
+    summary:
+      'Reforma de um apartamento de 270 m² em Higienópolis para a cozinheira e apresentadora Raíza Costa e a família.',
     context:
-      'Planta compartimentada, cozinha isolada e pouca luz natural no miolo. O casal precisava de dois postos de trabalho sem abrir mão de receber.',
+      'Projeto da disciplina de Projeto de Ambientes e Interiores. As mudanças precisavam preservar a personalidade e o bem-estar dos moradores, e abrir espaço para um escritório com privacidade e isolamento acústico — resolvido no quarto mais afastado da área social, que também recebe os hóspedes.',
     solution:
-      'Integração da cozinha com a sala, marcenaria sob medida que esconde um home office e um painel ripado que leva luz ao corredor.',
+      'Área social em conceito aberto, integrando cozinha, sala de jantar e sala de estar, para que a anfitriã interaja com os convidados mesmo cozinhando. Parte da adega passa a despensa no antigo quarto de serviço; a cozinha, de frente para ela, ganha armários e prateleiras até o teto. Detalhamento de marcenaria e vistas 1:20 de banheiro e cozinha, mais renderizações de todos os ambientes.',
   },
   {
-    id: 'casa-cotia',
-    title: 'Casa Cotia',
-    year: 2022,
-    category: 'realizado',
-    discipline: 'Residencial',
-    location: 'Cotia, SP',
-    area: '210 m²',
-    summary: 'Projeto de uma casa térrea em terreno de esquina, com pátio central.',
-    context:
-      'Terreno em aclive e exposto ao sol poente. A família queria áreas sociais amplas e privacidade em relação à rua.',
-    solution:
-      'Volume em "L" voltado para um pátio interno, cobertura com beiral generoso a oeste e brises de madeira que filtram o sol da tarde.',
-  },
-  {
-    id: 'cafe-pinheiros',
-    title: 'Café em Pinheiros',
+    id: 'edificio-cdhu',
+    title: 'Edifício habitacional CDHU',
     year: 2023,
-    category: 'realizado',
-    discipline: 'Comercial · Varejo',
-    location: 'São Paulo, SP',
-    area: '95 m²',
-    summary: 'Identidade espacial de uma cafeteria de bairro, do balcão à fachada.',
+    discipline: 'Habitação social',
+    location: 'Av. Corifeu de Azevedo Marques, São Paulo',
+    summary:
+      'Edifício de habitação social com apartamentos de organização espelhada em terreno irregular.',
     context:
-      'Ponto pequeno, pé-direito baixo e necessidade de girar mesas rápido no horário de pico sem parecer apertado.',
+      'Projeto da disciplina de Materiais, Técnicas e Tecnologias de Construção. O terreno é irregular e em aclive, e o projeto precisa atender à Lei Municipal nº 13.885/04 (recuo mínimo de 5 m) e garantir acessibilidade.',
     solution:
-      'Balcão como âncora visual, espelho contínuo que dobra o pé-direito percebido, mobiliário modular e paleta de concreto, aço e madeira clara.',
+      'Plantas espelhadas para aproveitar a área e simplificar execução e manutenção. Os blocos são desalinhados para minimizar cortes no solo e os conjuntos, elevados 3 m em relação à rua. Quadra e playground vão para a frente do terreno, pela luz natural; uma plataforma elevatória ao lado da escada resolve o acesso.',
   },
   {
-    id: 'clinica-itaim',
-    title: 'Clínica Odontológica Itaim',
-    year: 2021,
-    category: 'realizado',
-    discipline: 'Comercial · Saúde',
-    location: 'São Paulo, SP',
-    area: '140 m²',
-    summary: 'Projeto de quatro consultórios, recepção e áreas de apoio dentro das normas sanitárias.',
+    id: 'pavilhao-exposicoes',
+    title: 'Pavilhão de exposições',
+    year: 2023,
+    discipline: 'Estruturas · institucional',
+    location: 'Tatuapé, São Paulo',
+    area: 'terreno de 122 × 88 m',
+    summary:
+      'Centro de exposições no Tatuapé, com uma passarela treliçada de ligação direta ao metrô.',
     context:
-      'Laje corrida sem divisórias e exigências de fluxo (limpo/sujo), acústica entre consultórios e uma recepção que não intimidasse o paciente.',
+      'Projeto da disciplina de Sistemas Estruturais e Construtivos. O terreno de esquina fica entre a Rua Melo Peixoto e a Rua Dr. Coryntho Baldoíno Costa, a um quarteirão do Metrô Carrão.',
     solution:
-      'Setorização clara entre fluxos, forro acústico entre consultórios e uma recepção com marcenaria amadeirada e luz quente que tira o peso do ambiente clínico.',
+      'Uma passarela coberta em aço treliçado (15 × 5 m) liga o metrô ao centro expositivo, com catracas de controle na chegada. A estrutura combina viga vagão, viga treliçada, cabos de aço e concreto armado, com vedações em vidro laminado temperado.',
   },
   {
-    id: 'cobertura-perdizes',
-    title: 'Cobertura Perdizes',
+    id: 'studio-pinheiros',
+    title: 'Studio em Pinheiros',
     year: 2024,
-    category: 'realizado',
-    discipline: 'Residencial · Interiores',
-    location: 'São Paulo, SP',
-    area: '160 m²',
-    summary: 'Interiores de uma cobertura duplex, com terraço integrado à área gourmet.',
+    discipline: 'Interiores · 24 m²',
+    location: 'Pinheiros, São Paulo',
+    area: '24 m²',
+    summary:
+      'Studio de 24 m² com layout flexível que alterna entre uso residencial e de trabalho.',
     context:
-      'Espaço entregue pela construtora sem personalidade, escada central mal aproveitada e terraço desconectado da sala.',
+      'Projeto da disciplina de Realidade Contemporânea. Em 24 m², o mesmo espaço precisa servir bem ao trabalho e à vida cotidiana, com conversão fácil entre os dois usos.',
     solution:
-      'Escada revestida em pedra com guarda-corpo de vidro, caixilhos ampliados para o terraço e uma cozinha que se fecha por painéis quando necessário. Curadoria de mobiliário e arte.',
+      'Móveis inteligentes, retráteis e multifuncionais liberam área ao longo do dia. Em vez de um canto fixo de home office, o posto de trabalho se distribui pela habitação. Os ambientes de descanso e convívio são desenhados para promover calma e bem-estar.',
   },
   {
-    id: 'loja-santa-cecilia',
-    title: 'Loja de roupas Santa Cecília',
-    year: 2022,
-    category: 'realizado',
-    discipline: 'Comercial · Varejo',
-    location: 'São Paulo, SP',
-    area: '60 m²',
-    summary: 'Projeto de uma loja-conceito de moda autoral em sobrado tombado.',
+    id: 'escola-sao-francisco-do-sul',
+    title: 'Escola em São Francisco do Sul',
+    year: 2024,
+    discipline: 'Conforto ambiental',
+    location: 'São Francisco do Sul, SC',
+    summary:
+      'Escola em três blocos articulada por uma parede de cobogós, projetada a partir do clima local.',
     context:
-      'Imóvel histórico com restrições de intervenção, estrutura de madeira aparente e orçamento enxuto.',
+      'Projeto da disciplina de Conforto Ambiental. O ponto de partida foi o estudo do terreno e do clima de São Francisco do Sul (SC), com cartas solares e rosa dos ventos.',
     solution:
-      'Araras e expositores autoportantes (nada fixado nas paredes originais), iluminação em trilho e provador central como peça escultórica. Intervenção 100% reversível.',
+      'Brises e cobogós adaptam o conforto ao longo do dia. Três blocos — administrativo, serviço e pedagógico — se conectam ao refeitório, no centro. A parede de cobogós é o elemento de destaque: sombreia as salas de aula e dá identidade ao conjunto.',
   },
   {
-    id: 'tfg-habitacao-heliopolis',
-    title: 'TFG — Habitação social em Heliópolis',
-    year: 2019,
-    category: 'academico',
-    discipline: 'Urbanismo · Habitação',
-    location: 'São Paulo, SP',
-    summary: 'Trabalho Final de Graduação: conjunto habitacional com comércio no térreo e espaços coletivos.',
+    id: 'his-hmp-mooca',
+    title: 'HIS e HMP na Mooca',
+    year: 2025,
+    discipline: 'Habitação · urbanismo',
+    location: 'Mooca, São Paulo',
+    area: '10.811 m²',
+    summary:
+      '300 moradias de interesse social e de mercado popular em quatro torres, com térreo ativo.',
     context:
-      'Gleba pública subutilizada na borda da comunidade, demanda por moradia e por equipamentos de bairro.',
+      'Projeto da disciplina de Projeto de Habitação. A gleba de cerca de 10.811 m² fica entre as ruas dos Trilhos, Telmo Giolito Porto e Bresser, na Mooca (SP).',
     solution:
-      'Lâminas de 5 pavimentos com circulação externa, unidades flexíveis (1 a 3 dormitórios), térreo ativo com comércio e creche, e uma praça que costura o conjunto ao tecido existente.',
-  },
-  {
-    id: 'pavilhao-ibirapuera',
-    title: 'Pavilhão efêmero no Ibirapuera',
-    year: 2018,
-    category: 'academico',
-    discipline: 'Concurso estudantil',
-    location: 'São Paulo, SP',
-    summary: 'Proposta premiada em concurso interno para um pavilhão temporário de exposições.',
-    context:
-      'Estrutura desmontável, montagem em até uma semana e reaproveitamento total das peças.',
-    solution:
-      'Módulo de andaimes tubulares e lonas tensionadas, fundação em blocos de concreto pré-moldado sem escavação, catálogo de peças pensado para remontagem em outros parques.',
-  },
-  {
-    id: 'galpao-ferroviario',
-    title: 'Requalificação de galpão ferroviário',
-    year: 2018,
-    category: 'academico',
-    discipline: 'Patrimônio · Uso misto',
-    location: 'Jundiaí, SP',
-    summary: 'Estudo de reúso de um galpão ferroviário para mercado e espaço de trabalho compartilhado.',
-    context:
-      'Estrutura metálica histórica em bom estado, mas sem uso há décadas e desconectada do centro.',
-    solution:
-      'Inserção de um "edifício dentro do edifício" em madeira, preservando a nave e a leitura da estrutura original; mercado no térreo, coworking no mezanino.',
-  },
-  {
-    id: 'centro-cultural-bairro',
-    title: 'Centro cultural de bairro',
-    year: 2017,
-    category: 'academico',
-    discipline: 'Equipamento público',
-    location: 'São Paulo, SP',
-    summary: 'Projeto de um pequeno centro cultural com biblioteca, oficinas e teatro de bolso.',
-    context:
-      'Terreno de esquina em bairro sem equipamentos culturais, orçamento público limitado.',
-    solution:
-      'Programa empilhado em três pavimentos com pátio coberto de acesso livre, fachada permeável em cobogós e um teatro de 80 lugares que também abre para a praça.',
+      'Quatro torres posicionadas por análise climática, uma rua interna compartilhada com prioridade a pedestres e ciclistas, galeria de arte e praça central. O térreo é ativo, com lojas e comércio abertos ao público, e a entrada dos moradores tem portaria controlada.',
   },
 ] as const satisfies readonly Project[]
-
-export const REALIZADOS: readonly Project[] = PROJECTS.filter((p) => p.category === 'realizado')
-export const ACADEMICOS: readonly Project[] = PROJECTS.filter((p) => p.category === 'academico')

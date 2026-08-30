@@ -13,8 +13,8 @@ export default function Services() {
       <SectionHead
         sectionId={SECTION.servicos}
         index="04"
-        eyebrow="Serviços"
-        title="Projeto, interiores e acompanhamento de obra"
+        eyebrow="Competências"
+        title="O que sei fazer"
       />
 
       <div className={styles.grid}>

@@ -18,23 +18,17 @@ export type SiteContent = {
   /** Digits only, no `+` or spaces — used to build the wa.me link. */
   whatsapp?: string
   city: string
-  /** CAU/BR registration — the credential a prospective client checks. */
-  cau?: string
-  instagram?: string
   linkedin?: string
   /** Short first-person paragraphs for the "Sobre" section. */
   about: readonly string[]
 }
-
-export type ProjectCategory = 'realizado' | 'academico'
 
 export type Project = {
   /** Unique, kebab-case. Used in the URL hash and as the placeholder-image seed. */
   id: string
   title: string
   year: number
-  category: ProjectCategory
-  /** "Residencial", "Comercial", "Interiores", "Urbanismo"… */
+  /** Course it came from, e.g. "Projeto de Ambientes e Interiores". */
   discipline: string
   location?: string
   /** e.g. "78 m²". */
@@ -67,7 +61,7 @@ export type Service = {
 }
 
 export type Metric = {
-  /** Display string, already formatted: "+80", "12.000 m²", "8 anos". */
+  /** Display string, already formatted: "6", "2026", "2 anos". */
   value: string
   label: string
 }

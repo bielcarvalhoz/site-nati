@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { ACADEMICOS, REALIZADOS } from '../data/projects'
-import type { Project, ProjectCategory } from '../data/types'
+import { PROJECTS } from '../data/projects'
+import type { Project } from '../data/types'
 import { SECTION, titleIdFor } from '../lib/nav'
 import Placeholder from '../components/Placeholder'
 import SectionHead from '../components/SectionHead'
@@ -16,12 +16,9 @@ function ProjectImage({ project }: { project: Project }) {
 }
 
 export default function Projects() {
-  const [filter, setFilter] = useState<ProjectCategory>('realizado')
   const [selected, setSelected] = useState<Project | null>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const lastTrigger = useRef<HTMLButtonElement | null>(null)
-
-  const list = filter === 'realizado' ? REALIZADOS : ACADEMICOS
 
   const close = useCallback(() => {
     dialogRef.current?.close()
@@ -32,13 +29,19 @@ export default function Projects() {
     if (!dlg) return
     if (selected && !dlg.open) dlg.showModal()
 
+    // showModal() blocks clicks behind the backdrop but not wheel/touch scroll
+    document.body.style.overflow = selected ? 'hidden' : ''
+
     const onClose = () => {
       setSelected(null)
       lastTrigger.current?.focus()
       lastTrigger.current = null
     }
     dlg.addEventListener('close', onClose)
-    return () => dlg.removeEventListener('close', onClose)
+    return () => {
+      dlg.removeEventListener('close', onClose)
+      document.body.style.overflow = ''
+    }
   }, [selected])
 
   return (
@@ -47,30 +50,11 @@ export default function Projects() {
         sectionId={SECTION.projetos}
         index="01"
         eyebrow="Projetos"
-        title="Projetos selecionados"
+        title="Projetos autorais do curso"
       />
 
-      <div className={styles.filter} role="group" aria-label="Filtrar projetos">
-        <button
-          type="button"
-          className={styles.filterBtn}
-          aria-pressed={filter === 'realizado'}
-          onClick={() => setFilter('realizado')}
-        >
-          Profissionais <span className={styles.count}>{REALIZADOS.length}</span>
-        </button>
-        <button
-          type="button"
-          className={styles.filterBtn}
-          aria-pressed={filter === 'academico'}
-          onClick={() => setFilter('academico')}
-        >
-          Acadêmicos <span className={styles.count}>{ACADEMICOS.length}</span>
-        </button>
-      </div>
-
       <ul className={styles.grid}>
-        {list.map((project) => (
+        {PROJECTS.map((project) => (
           <li key={project.id}>
             <button
               type="button"
@@ -120,9 +104,7 @@ export default function Projects() {
             )}
 
             <div className={styles.dialogBody}>
-              <p className="eyebrow">
-                {selected.category === 'realizado' ? 'Projeto profissional' : 'Trabalho acadêmico'}
-              </p>
+              <p className="eyebrow">Projeto acadêmico</p>
               <h3 id={DIALOG_TITLE_ID} className={styles.dialogTitle}>
                 {selected.title}
               </h3>

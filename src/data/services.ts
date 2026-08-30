@@ -1,62 +1,63 @@
 import type { Service } from './types'
 
-/* Serviços oferecidos. Ajuste os textos e entregáveis conforme a prática real. */
+/* "Competências" na UI. Baseado nos projetos do curso e na experiência de estágio
+   (Grupo Luminae — luminotécnica; BP8 — projetos). */
 export const SERVICES = [
   {
-    id: 'projeto-arquitetura',
-    title: 'Projeto de arquitetura',
+    id: 'interiores',
+    title: 'Projeto de interiores',
     description:
-      'Do estudo preliminar ao projeto executivo, para construir do zero, ampliar ou legalizar.',
+      'Estudo de layout e circulação, integração de ambientes e caderno de acabamentos, do primeiro partido à especificação final.',
     deliverables: [
-      'Estudo preliminar e implantação',
-      'Anteprojeto e aprovações',
-      'Projeto executivo e detalhamento',
-      'Compatibilização com engenharia',
+      'Estudo de layout e fluxos',
+      'Integração de ambientes',
+      'Especificação de acabamentos',
+      'Estudo de mobiliário',
     ],
   },
   {
-    id: 'design-interiores',
-    title: 'Design de interiores',
+    id: 'detalhamento',
+    title: 'Detalhamento construtivo',
     description:
-      'Layout, marcenaria, iluminação e acabamentos pensados para a rotina de quem vai usar o espaço.',
+      'Marcenaria sob medida, bancadas, gabinetes e vistas em escala — o desenho que a obra e o marceneiro executam.',
     deliverables: [
-      'Estudo de layout e circulação',
-      'Projeto de marcenaria sob medida',
-      'Projeto luminotécnico',
-      'Caderno de acabamentos e mobiliário',
+      'Marcenaria em MDF',
+      'Vistas e cortes 1:20',
+      'Detalhe de gabinetes e bancadas',
+      'Compatibilização de medidas',
     ],
   },
   {
-    id: 'reforma',
-    title: 'Reforma',
+    id: 'luminotecnica',
+    title: 'Projeto luminotécnico',
     description:
-      'Reformas residenciais e comerciais, do diagnóstico da estrutura existente ao detalhamento para execução.',
+      'Cálculo, especificação de luminárias e fita de LED e integração da luz ao projeto — repertório do Grupo Luminae.',
     deliverables: [
-      'Levantamento e diagnóstico',
-      'Projeto de demolir e construir',
-      'Detalhamento e especificações',
-      'Planilha de orçamento para cotação',
+      'Cálculo e níveis de iluminância',
+      'Especificação de luminárias',
+      'Fita de LED e sancas',
+      'Simulação em DIALux EVO',
     ],
   },
   {
-    id: 'acompanhamento-obra',
-    title: 'Acompanhamento de obra',
+    id: 'conforto-habitacao',
+    title: 'Conforto ambiental e habitação',
     description:
-      'Visitas periódicas ao canteiro para garantir que o que foi projetado é o que se constrói.',
+      'Carta solar, ventilação, brises e cobogós; implantação e unidades para habitação de interesse social dentro da legislação.',
     deliverables: [
-      'Visitas técnicas e relatórios',
-      'Esclarecimento de detalhes com a equipe',
-      'Coordenação de fornecedores e marcenaria',
-      'Conferência de entrega',
+      'Carta solar e rosa dos ventos',
+      'Brises e cobogós',
+      'Implantação e recuos',
+      'Unidades HIS / HMP',
     ],
   },
 ] as const satisfies readonly Service[]
 
-/* Ferramentas de projeto e representação. */
+/* Softwares de projeto e representação. */
 export const TOOLS = [
   'AutoCAD',
   'Revit',
   'SketchUp',
-  'Enscape',
   'Lumion',
+  'DIALux EVO',
 ] as const satisfies readonly string[]

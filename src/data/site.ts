@@ -1,31 +1,30 @@
 import type { SiteContent } from './types'
 
-/* Dados institucionais do site. Edite aqui — nada de texto fixo nos componentes.
-   Nome confirmado: Natália Martinelli Damasceno.
-   TODO trocar (fictício por enquanto): e-mail, telefone, WhatsApp, CAU, @ das redes, cidade se for o caso. */
+/* Dados do site. Fonte: currículo/portfólio da Natália (src/assets/portfolio-antigo.pdf).
+   TODO: empresa atual dela (hoje entra como "assistente técnica de arquitetura" sem
+   nome do escritório — ela vai passar). */
 export const SITE = {
   name: 'Natália',
   fullName: 'Natália Martinelli Damasceno',
-  role: 'Arquiteta e Urbanista',
+  role: 'Arquitetura e Urbanismo',
 
   tagline:
-    'Arquitetura e design de interiores para casas, apartamentos e comércio — do primeiro estudo à obra entregue.',
+    'Projeto de interiores, detalhamento e luminotécnica — do estudo de layout ao caderno de acabamentos.',
   heroLead:
-    'Cada projeto nasce de como as pessoas usam o espaço e chega ao canteiro com desenho executivo completo, para a obra construir exatamente o que foi projetado.',
+    'Finalista de Arquitetura e Urbanismo na São Judas Tadeu (2026), já atuando como assistente técnica de arquitetura. Abaixo, seis projetos autorais do curso — do partido ao detalhamento.',
 
-  footerLine: 'Arquitetura residencial, comercial e de interiores — do conceito à obra.',
+  footerLine:
+    'Arquitetura e Urbanismo · projeto de interiores, detalhamento e luminotécnica.',
 
-  email: 'contato@nataliamd.arq.br',
-  phone: '+55 11 3000-0000',
-  whatsapp: '5511930000000',
-  city: 'São Paulo, SP',
-  cau: 'CAU/BR A000000-0',
-  instagram: 'https://instagram.com/nataliamd.arq',
-  linkedin: 'https://linkedin.com/in/nataliamd',
+  email: 'natalia.m.damasceno0511@gmail.com',
+  phone: '+55 11 95393-8834',
+  whatsapp: '5511953938834',
+  city: 'Osasco, SP',
+  linkedin: 'https://www.linkedin.com/in/nat%C3%A1lia-damasceno/',
 
   about: [
-    'Sou arquiteta e urbanista com atuação em projeto e acompanhamento de obra. Trabalho com residências, espaços comerciais e reformas, sempre partindo de como as pessoas realmente usam o espaço.',
-    'Trabalho lado a lado com quem vai morar ou operar o espaço, do primeiro layout à última especificação de acabamento. O cliente entende cada decisão porque participou dela.',
-    'Ao longo dos anos passei por escritórios de portes diferentes, o que me deu repertório tanto para o projeto autoral quanto para a coordenação com engenharia, marcenaria e fornecedores.',
+    'Sou estudante de Arquitetura e Urbanismo na Universidade São Judas Tadeu, concluindo em 2026, e já atuo como assistente técnica de arquitetura no dia a dia de escritório.',
+    'Meu interesse é projeto de interiores e detalhamento — marcenaria, especificação de acabamentos e luminotécnica, essa última puxada pela passagem pelo Grupo Luminae, com projetos luminotécnicos para residências e comércio.',
+    'Os projetos deste portfólio são acadêmicos e autorais, de interiores a habitação de interesse social. Em cada um eu levo o processo do partido ao detalhamento construtivo e às renderizações.',
   ],
 } as const satisfies SiteContent

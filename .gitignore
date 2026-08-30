@@ -25,3 +25,9 @@ screenshots
 *.njsproj
 *.sln
 *.sw?
+
+# portfólio-fonte da Natália (65 MB) — fica local, não versionar
+src/assets/portfolio-antigo.pdf
+
+# grafo local do graphify (ferramenta de navegação, não é entregável)
+graphify-out/

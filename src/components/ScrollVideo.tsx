@@ -12,13 +12,15 @@ type Props = {
   endHold?: number
   /** sr-only description of what the clip shows. */
   label?: string
+  /** drafting title-block caption shown over the clip. */
+  plate?: string
 }
 
 const TAU = 0.16
 const FPS = 60
 const FALLBACK_DUR = 5
 
-export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98, label }: Props) {
+export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98, label, plate }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -190,9 +192,11 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
           aria-hidden="true"
           {...{ 'webkit-playsinline': 'true' }}
         />
-        <p className={styles.plate} aria-hidden="true">
-          Arquiteta e Urbanista · Natália
-        </p>
+        {plate ? (
+          <p className={styles.plate} aria-hidden="true">
+            {plate}
+          </p>
+        ) : null}
         {label ? <p className="sr-only">{label}</p> : null}
       </div>
     </div>
