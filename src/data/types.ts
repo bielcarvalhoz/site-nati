@@ -57,6 +57,8 @@ export type JourneyEntry = {
   role: string
   org: string
   description: string
+  /** Company logo path (public/trajetoria/*). Absent → the timeline dot is used. */
+  logo?: string
 }
 
 export type Service = {

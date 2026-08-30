@@ -131,8 +131,9 @@ A Vercel detecta o Vite automaticamente (`npm run build` → `dist/`).
 
 ## Ainda pendente
 
-- **escritório atual** dela na trajetória (`journey.ts`) entra como "Escritório de
-  arquitetura" — falta o nome
-- **fotos/pranchas** dos projetos — todos usam placeholder; exportar do PDF e plugar
-  em `cover`/`gallery` (ver "Colocar fotos reais")
-- confirmar com ela o texto do "Sobre" e a frase do topo (`site.ts`)
+- confirmar com ela o texto em geral: "Sobre" e frase do topo (`site.ts`), resumos
+  dos projetos (`projects.ts`), descrições da trajetória (`journey.ts`)
+- **retrato** (`public/natalia.jpg`) é uma selfie do portfólio antigo — trocar por
+  headshot quando ela tiver um
+- pranchas dos projetos são recortes de página do PDF; se ela tiver os renders em
+  alta, substituir em `public/projetos/<id>/`

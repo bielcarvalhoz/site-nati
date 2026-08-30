@@ -1,4 +1,5 @@
 import { JOURNEY } from '../data/journey'
+import type { JourneyEntry } from '../data/types'
 import { METRICS } from '../data/metrics'
 import { SECTION, titleIdFor } from '../lib/nav'
 import SectionHead from '../components/SectionHead'
@@ -28,8 +29,18 @@ export default function Journey() {
       </ul>
 
       <ol className={styles.timeline}>
-        {JOURNEY.map((entry) => (
+        {JOURNEY.map((entry: JourneyEntry) => (
           <li key={entry.period} className={styles.entry}>
+            {entry.logo ? (
+              <img
+                className={styles.logo}
+                src={entry.logo}
+                alt=""
+                loading="lazy"
+                width={28}
+                height={28}
+              />
+            ) : null}
             <p className={styles.period}>{entry.period}</p>
             <p className={styles.role}>
               {entry.role} <span className={styles.org}>· {entry.org}</span>
