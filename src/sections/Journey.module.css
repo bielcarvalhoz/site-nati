@@ -47,14 +47,8 @@
   height: 0.6rem;
   background: var(--accent);
 }
-/* First entry (current role) reads as the live end of the line. */
-.entry:first-child::before {
-  width: 0.75rem;
-  height: 0.75rem;
-  left: calc(-1px - 0.375rem);
-  top: 0.3rem;
-}
-/* When the entry has a company logo, it replaces the dot on the line. */
+/* When the entry has a company logo, it replaces the dot on the line.
+   Every entry currently has one; the bare dot stays as the fallback. */
 .entry:has(.logo)::before {
   display: none;
 }

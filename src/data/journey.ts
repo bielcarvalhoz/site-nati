@@ -40,6 +40,7 @@ export const JOURNEY = [
     period: '2022 — 2026',
     role: 'Graduação em Arquitetura e Urbanismo',
     org: 'Universidade São Judas Tadeu',
+    logo: '/trajetoria/saojudas.jpg',
     description:
       'Ênfase em projeto. Seis projetos autorais ao longo do curso, de interiores a habitação de interesse social.',
   },
