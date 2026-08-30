@@ -72,6 +72,6 @@
 }
 .desc {
   margin-top: var(--space-sm);
-  color: var(--muted);
+  color: var(--ink-soft);
   max-width: 54ch;
 }

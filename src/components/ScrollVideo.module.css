@@ -45,12 +45,12 @@
   bottom: var(--space-lg);
   padding: 0.5rem 0.8rem;
   border: 1px solid var(--hairline);
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-mono);
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-soft);
 }
 
 /* Poster-only fallback (reduced motion / small screen / no video). */

@@ -142,8 +142,10 @@ p {
   user-select: none;
 }
 
-@media (min-width: 60rem) {
-  /* Numeral pulls into the left margin as a drafting-sheet index mark. */
+/* Numeral pulls into the left margin as a drafting-sheet index mark — but only
+   once the viewport is wide enough that the container's margin can hold it;
+   below that it stays inline above the eyebrow (its default flow position). */
+@media (min-width: 82rem) {
   .section-head__index {
     position: absolute;
     right: calc(100% + var(--space-lg));

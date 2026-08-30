@@ -35,7 +35,10 @@ describe('projects', () => {
       if (p.cover !== undefined) expect(nonEmpty(p.cover)).toBe(true)
       if (p.gallery !== undefined) {
         expect(p.gallery.length).toBeGreaterThan(0)
-        for (const src of p.gallery) expect(nonEmpty(src)).toBe(true)
+        for (const img of p.gallery) {
+          expect(nonEmpty(img.src)).toBe(true)
+          expect(nonEmpty(img.alt)).toBe(true)
+        }
       }
     }
   })

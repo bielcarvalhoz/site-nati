@@ -61,7 +61,7 @@ export default function Layout({ children }: Props) {
                   <li key={item.id}>
                     <a
                       href={`#${item.id}`}
-                      aria-current={active === item.id ? 'location' : undefined}
+                      aria-current={active === item.id ? 'page' : undefined}
                       onClick={() => setMenuOpen(false)}
                     >
                       {item.label}

@@ -26,7 +26,9 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
   const videoRef = useRef<HTMLVideoElement>(null)
   const [pinned, setPinned] = useState(false)
 
-  // pin whenever motion is allowed — desktop and mobile alike; live with the query
+  // pin whenever motion is allowed — desktop and mobile alike. Data-saver users
+  // keep the pin but skip the automatic download (see startLoad); reduced-motion
+  // drops to the static poster entirely.
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
     const resolve = () => setPinned(!reduce.matches)
@@ -35,13 +37,19 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
     return () => reduce.removeEventListener('change', resolve)
   }, [])
 
-  // start reloads at the top so the clip plays from its first frame
+  // suppress the browser's scroll restoration just for this load, so a reload
+  // starts the clip from its first frame — then hand control straight back so
+  // in-session history navigation still restores position normally
   useEffect(() => {
-    if (!pinned) return
+    if (!pinned || !('scrollRestoration' in history)) return
     const prev = history.scrollRestoration
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    history.scrollRestoration = 'manual'
+    const raf = requestAnimationFrame(() => {
+      history.scrollRestoration = prev
+    })
     return () => {
-      if ('scrollRestoration' in history) history.scrollRestoration = prev
+      cancelAnimationFrame(raf)
+      history.scrollRestoration = prev
     }
   }, [pinned])
 
@@ -133,8 +141,13 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
     }
     window.addEventListener('pointerdown', unlock, { once: true })
 
-    // pull the file only once the page has settled, so it doesn't fight the LCP poster
+    // pull the file only once the page has settled, so it doesn't fight the LCP
+    // poster — and never eagerly on data-saver connections (it still loads on the
+    // first scroll/tap via the seek in tick())
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+      ?.saveData
     const startLoad = () => {
+      if (saveData) return
       try {
         video.preload = 'auto'
         video.load()
@@ -162,7 +175,9 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
   }, [pinned, endHold])
 
   if (!pinned) {
-    return <img className={styles.still} src={poster} alt="" aria-hidden="true" />
+    return (
+      <img className={styles.still} src={poster} alt={label ?? ''} fetchPriority="high" />
+    )
   }
 
   return (
@@ -172,7 +187,13 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
       style={{ '--scrub': `${scrubVh}svh` } as CSSProperties}
     >
       <div ref={stageRef} className={styles.stage}>
-        <img className={styles.poster} src={poster} alt="" aria-hidden="true" />
+        <img
+          className={styles.poster}
+          src={poster}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+        />
         <video
           ref={videoRef}
           className={styles.media}

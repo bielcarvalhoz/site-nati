@@ -31,7 +31,11 @@
 .input:focus,
 .textarea:focus {
   border-color: var(--ink);
-  outline: none;
+}
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 .input[aria-invalid='true'],
 .textarea[aria-invalid='true'] {
@@ -76,8 +80,8 @@
 .status {
   font-size: var(--text-sm);
 }
-.status[data-tone='ok'] {
-  color: var(--ink);
+.status:empty {
+  display: none;
 }
 .status[data-tone='error'] {
   color: var(--accent);

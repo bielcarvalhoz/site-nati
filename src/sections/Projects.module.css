@@ -67,7 +67,7 @@
   margin: auto;
   position: relative; /* anchor for the close button, so it stays put while the body scrolls */
   width: min(52rem, calc(100vw - 2 * var(--gutter)));
-  max-height: min(90dvh, 48rem);
+  max-height: min(85dvh, 44rem);
   padding: 0;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-lg);
@@ -84,6 +84,7 @@
   position: relative;
   max-height: inherit;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .dialogMedia {
@@ -107,8 +108,16 @@
 .gallery img {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  max-height: 60vh;
+  object-fit: contain;
   background: var(--bg-sunken);
+}
+/* one image → let it size to its own aspect instead of a tall 4:3 slab */
+.gallery:has(img:only-child) {
+  grid-template-columns: 1fr;
+}
+.gallery:has(img:only-child) img {
+  aspect-ratio: auto;
 }
 
 .dialogBody {
@@ -117,7 +126,7 @@
 .dialogClose {
   position: absolute;
   z-index: 2;
-  top: var(--space-sm);
+  top: max(var(--space-sm), env(safe-area-inset-top));
   right: var(--space-sm);
   width: 44px;
   height: 44px;

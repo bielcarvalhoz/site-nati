@@ -39,10 +39,16 @@ export type Project = {
   context: string
   /** What was done and the result. */
   solution: string
-  /** Image path. Absent → a deterministic placeholder is rendered from `id`. */
+  /** Card image path. Absent → a deterministic placeholder is rendered from `id`. */
   cover?: string
-  /** Extra images. The tuple type makes an empty gallery a compile error. */
-  gallery?: readonly [string, ...string[]]
+  /** Dialog images, each with its own alt. Tuple type forbids an empty gallery. */
+  gallery?: readonly [GalleryImage, ...GalleryImage[]]
+}
+
+export type GalleryImage = {
+  src: string
+  /** What the image actually shows — not "<project> image". */
+  alt: string
 }
 
 export type JourneyEntry = {

@@ -21,9 +21,18 @@ export const PROJECTS = [
       'Área social em conceito aberto, integrando cozinha, sala de jantar e sala de estar, para que a anfitriã interaja com os convidados mesmo cozinhando. Parte da adega passa a despensa no antigo quarto de serviço; a cozinha, de frente para ela, ganha armários e prateleiras até o teto. Detalhamento de marcenaria e vistas 1:20 de banheiro e cozinha, mais renderizações de todos os ambientes.',
     cover: '/projetos/casa-raiza-costa/cover.jpg',
     gallery: [
-      '/projetos/casa-raiza-costa/cover.jpg',
-      '/projetos/casa-raiza-costa/02.jpg',
-      '/projetos/casa-raiza-costa/03.jpg',
+      {
+        src: '/projetos/casa-raiza-costa/cover.jpg',
+        alt: 'Render da sala de estar integrada, com sofá claro, poltrona amarela e piso de madeira',
+      },
+      {
+        src: '/projetos/casa-raiza-costa/02.jpg',
+        alt: 'Render da cozinha e da despensa, com marcenaria amarela e papel de parede floral',
+      },
+      {
+        src: '/projetos/casa-raiza-costa/03.jpg',
+        alt: 'Render do escritório, com bancada de madeira, sofá e painel de quadros',
+      },
     ],
   },
   {
@@ -39,7 +48,16 @@ export const PROJECTS = [
     solution:
       'Plantas espelhadas para aproveitar a área e simplificar execução e manutenção. Os blocos são desalinhados para minimizar cortes no solo e os conjuntos, elevados 3 m em relação à rua. Quadra e playground vão para a frente do terreno, pela luz natural; uma plataforma elevatória ao lado da escada resolve o acesso.',
     cover: '/projetos/edificio-cdhu/cover.jpg',
-    gallery: ['/projetos/edificio-cdhu/cover.jpg', '/projetos/edificio-cdhu/02.jpg'],
+    gallery: [
+      {
+        src: '/projetos/edificio-cdhu/cover.jpg',
+        alt: 'Desenho de elevação do edifício de cinco pavimentos, com os dois blocos e a caixa de escada central',
+      },
+      {
+        src: '/projetos/edificio-cdhu/02.jpg',
+        alt: 'Implantação do conjunto, com blocos desalinhados e quadra e playground na frente do terreno',
+      },
+    ],
   },
   {
     id: 'pavilhao-exposicoes',
@@ -56,9 +74,18 @@ export const PROJECTS = [
       'Uma passarela coberta em aço treliçado (15 × 5 m) liga o metrô ao centro expositivo, com catracas de controle na chegada. A estrutura combina viga vagão, viga treliçada, cabos de aço e concreto armado, com vedações em vidro laminado temperado.',
     cover: '/projetos/pavilhao-exposicoes/cover.jpg',
     gallery: [
-      '/projetos/pavilhao-exposicoes/cover.jpg',
-      '/projetos/pavilhao-exposicoes/02.jpg',
-      '/projetos/pavilhao-exposicoes/03.jpg',
+      {
+        src: '/projetos/pavilhao-exposicoes/cover.jpg',
+        alt: 'Render do interior sob a cúpula de vidro e estrutura metálica ramificada',
+      },
+      {
+        src: '/projetos/pavilhao-exposicoes/02.jpg',
+        alt: 'Render da fachada externa curva, revestida em painéis claros',
+      },
+      {
+        src: '/projetos/pavilhao-exposicoes/03.jpg',
+        alt: 'Render do pátio coberto, com pergolado de vegetação e assentos',
+      },
     ],
   },
   {
@@ -75,7 +102,12 @@ export const PROJECTS = [
     solution:
       'Móveis inteligentes, retráteis e multifuncionais liberam área ao longo do dia. Em vez de um canto fixo de home office, o posto de trabalho se distribui pela habitação. Os ambientes de descanso e convívio são desenhados para promover calma e bem-estar.',
     cover: '/projetos/studio-pinheiros/cover.jpg',
-    gallery: ['/projetos/studio-pinheiros/cover.jpg'],
+    gallery: [
+      {
+        src: '/projetos/studio-pinheiros/cover.jpg',
+        alt: 'Maquete eletrônica do studio de 24 m² em quatro vistas isométricas seccionadas',
+      },
+    ],
   },
   {
     id: 'escola-sao-francisco-do-sul',
@@ -91,9 +123,18 @@ export const PROJECTS = [
       'Brises e cobogós adaptam o conforto ao longo do dia. Três blocos — administrativo, serviço e pedagógico — se conectam ao refeitório, no centro. A parede de cobogós é o elemento de destaque: sombreia as salas de aula e dá identidade ao conjunto.',
     cover: '/projetos/escola-sao-francisco-do-sul/cover.jpg',
     gallery: [
-      '/projetos/escola-sao-francisco-do-sul/cover.jpg',
-      '/projetos/escola-sao-francisco-do-sul/02.jpg',
-      '/projetos/escola-sao-francisco-do-sul/03.jpg',
+      {
+        src: '/projetos/escola-sao-francisco-do-sul/cover.jpg',
+        alt: 'Render do refeitório, com bancada revestida em pastilhas azuis e mesas compridas',
+      },
+      {
+        src: '/projetos/escola-sao-francisco-do-sul/02.jpg',
+        alt: 'Render da parede de cobogós que sombreia as salas de aula',
+      },
+      {
+        src: '/projetos/escola-sao-francisco-do-sul/03.jpg',
+        alt: 'Render da área de serviço, com brises horizontais na fachada',
+      },
     ],
   },
   {
@@ -111,9 +152,18 @@ export const PROJECTS = [
       'Quatro torres posicionadas por análise climática, uma rua interna compartilhada com prioridade a pedestres e ciclistas, galeria de arte e praça central. O térreo é ativo, com lojas e comércio abertos ao público, e a entrada dos moradores tem portaria controlada.',
     cover: '/projetos/his-hmp-mooca/cover.jpg',
     gallery: [
-      '/projetos/his-hmp-mooca/cover.jpg',
-      '/projetos/his-hmp-mooca/02.jpg',
-      '/projetos/his-hmp-mooca/03.jpg',
+      {
+        src: '/projetos/his-hmp-mooca/cover.jpg',
+        alt: 'Render de um dormitório, com cama de solteiro, parede terracota e quadro de paisagem',
+      },
+      {
+        src: '/projetos/his-hmp-mooca/02.jpg',
+        alt: 'Render da sala de estar, com parede azul-marinho e painel de madeira para a TV',
+      },
+      {
+        src: '/projetos/his-hmp-mooca/03.jpg',
+        alt: 'Render da cozinha compacta, com bancada de mármore e marcenaria clara',
+      },
     ],
   },
 ] as const satisfies readonly Project[]

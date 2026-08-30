@@ -10,7 +10,8 @@ const DIALOG_TITLE_ID = 'projeto-dialog-title'
 
 function ProjectImage({ project }: { project: Project }) {
   if (project.cover) {
-    return <img src={project.cover} alt={project.title} loading="lazy" />
+    // decorative here — the card button and the dialog heading already name the project
+    return <img src={project.cover} alt="" loading="lazy" />
   }
   return <Placeholder seed={project.id} label={project.title} />
 }
@@ -29,8 +30,11 @@ export default function Projects() {
     if (!dlg) return
     if (selected && !dlg.open) dlg.showModal()
 
-    // showModal() blocks clicks behind the backdrop but not wheel/touch scroll
-    document.body.style.overflow = selected ? 'hidden' : ''
+    // showModal() blocks clicks behind the backdrop but not wheel/touch scroll,
+    // and in Chrome the viewport scroller is <html>, not <body> — lock both
+    const lock = selected ? 'hidden' : ''
+    document.documentElement.style.overflow = lock
+    document.body.style.overflow = lock
 
     const onClose = () => {
       setSelected(null)
@@ -40,6 +44,7 @@ export default function Projects() {
     dlg.addEventListener('close', onClose)
     return () => {
       dlg.removeEventListener('close', onClose)
+      document.documentElement.style.overflow = ''
       document.body.style.overflow = ''
     }
   }, [selected])
@@ -90,11 +95,11 @@ export default function Projects() {
             <button type="button" className={styles.dialogClose} onClick={close} aria-label="Fechar">
               ✕
             </button>
-            <div className={styles.dialogScroll}>
+            <div className={styles.dialogScroll} tabIndex={-1}>
               {selected.gallery && selected.gallery.length > 0 ? (
                 <div className={styles.gallery}>
-                  {selected.gallery.map((src) => (
-                    <img key={src} src={src} alt={`${selected.title} — imagem`} />
+                  {selected.gallery.map((img) => (
+                    <img key={img.src} src={img.src} alt={img.alt} loading="lazy" />
                   ))}
                 </div>
               ) : (

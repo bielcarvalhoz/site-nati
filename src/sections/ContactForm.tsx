@@ -1,12 +1,19 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import styles from './ContactForm.module.css'
 
 const ENDPOINT = 'https://api.web3forms.com/submit'
 
 type Status = 'idle' | 'sending' | 'ok' | 'error'
 
+const ERROR_TEXT = 'Não foi possível enviar agora. Use o e-mail ou o WhatsApp abaixo.'
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
+  const successRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (status === 'ok') successRef.current?.focus()
+  }, [status])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -40,12 +47,7 @@ export default function ContactForm() {
         }),
       })
       const json = (await res.json()) as { success?: boolean }
-      if (json.success) {
-        setStatus('ok')
-        form.reset()
-      } else {
-        setStatus('error')
-      }
+      setStatus(json.success ? 'ok' : 'error')
     } catch {
       setStatus('error')
     }
@@ -53,7 +55,7 @@ export default function ContactForm() {
 
   if (status === 'ok') {
     return (
-      <div className={styles.success} role="status">
+      <div className={styles.success} role="status" tabIndex={-1} ref={successRef}>
         <p>Mensagem enviada. Respondo em até dois dias úteis.</p>
       </div>
     )
@@ -109,11 +111,10 @@ export default function ContactForm() {
         {status === 'sending' ? 'Enviando…' : 'Enviar mensagem'}
       </button>
 
-      {status === 'error' ? (
-        <p className={styles.status} data-tone="error" role="alert">
-          Não foi possível enviar agora. Use o e-mail ou o WhatsApp abaixo.
-        </p>
-      ) : null}
+      {/* always mounted so assistive tech reliably announces the change */}
+      <p className={styles.status} data-tone="error" role="alert">
+        {status === 'error' ? ERROR_TEXT : ''}
+      </p>
     </form>
   )
 }
