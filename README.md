@@ -101,24 +101,20 @@ vira o apartamento conforme você rola. No fim do vídeo o pin solta e o site co
   os dois extremos da transformação. As paredes sobem exatamente sobre as linhas da
   planta e a planta vira o piso. Pra regenerar mantendo a coerência: passe a planta
   como imagem inicial e um interior de referência como imagem final.
-- Trocar o vídeo: gere um MP4 novo, rode o `ffmpeg` abaixo em dois passos e substitua
-  `public/hero.mp4` + `public/hero-poster.jpg` (um quadro do fim). Ajuste `scrubVh` em
-  `Hero.tsx` (~40 × duração em segundos).
-  1. `minterpolate` com `mi_mode=mci` (compensação de movimento) gera quadros
-     intermediários reais → 60fps de verdade, sem o rastro do `mi_mode=blend`.
-  2. escala pra 1080p + `unsharp` leve; `-g 2` deixa o seek do scrub quase exato.
-  O passo 1 é lento (minutos); se travar, baixe `mc_mode`/`me_mode` ou o `preset`.
+- Resolução/fps: o `hero.mp4` atual (1920×1080, 60fps) saiu do **`upscale_video` do
+  Higgsfield** (provider `bytedance`, preset `aigc`, `resolution:1080p`, `fps:60`) em
+  cima do job do Seedance. É upscale de IA de verdade, não `scale` — a origem do
+  Seedance é 720p/24fps.
+- Trocar o vídeo: gere o MP4, passe pelo `upscale_video` (1080p/60fps), depois rode o
+  `ffmpeg` abaixo só pra deixar os keyframes densos (`-g 4` = seek do scrub quase
+  exato) e substitua `public/hero.mp4` + `public/hero-poster.jpg` (um quadro do fim).
+  Ajuste `scrubVh` em `Hero.tsx` (~40 × duração em segundos).
 
 ```bash
-# passo 1 — interpola pra 60fps (mantém a resolução da origem)
-ffmpeg -i entrada.mp4 -an -vf "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1" \
-  -c:v libx264 -preset medium -crf 18 -g 2 -keyint_min 2 -sc_threshold 0 \
-  -pix_fmt yuv420p -movflags +faststart _60fps.mp4
-# passo 2 — 1080p + leve sharpen
-ffmpeg -i _60fps.mp4 -an -vf "scale=1920:1080:flags=lanczos+accurate_rnd,unsharp=5:5:0.45:5:5:0" \
-  -c:v libx264 -preset slow -crf 18 -g 2 -keyint_min 2 -sc_threshold 0 \
-  -pix_fmt yuv420p -movflags +faststart public/hero.mp4
-ffmpeg -ss <seg> -i entrada.mp4 -frames:v 1 -vf "scale=1920:-2" -q:v 3 public/hero-poster.jpg
+ffmpeg -i upscaled.mp4 -an -vf "fps=60" -c:v libx264 -preset slow -crf 19 \
+  -g 4 -keyint_min 4 -sc_threshold 0 -pix_fmt yuv420p \
+  -movflags +faststart public/hero.mp4
+ffmpeg -ss <seg> -i upscaled.mp4 -frames:v 1 -vf "scale=1920:-2" -q:v 3 public/hero-poster.jpg
 ```
 
 ---
