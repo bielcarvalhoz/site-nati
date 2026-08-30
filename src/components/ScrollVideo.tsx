@@ -4,6 +4,9 @@ import styles from './ScrollVideo.module.css'
 type Props = {
   /** MP4, H.264 High, +faststart, dense keyframes, no audio. */
   src: string
+  /** Lighter MP4 for phones/touch — seeking a 1080p60 clip every frame stutters
+   *  on mobile decoders. Smaller frame + fewer fps + denser GOP scrubs smoothly. */
+  srcMobile?: string
   /** Poster / LCP image; also the last-frame fallback. */
   poster: string
   /** Scroll distance spent scrubbing, in vh. Higher = slower scrub. */
@@ -20,11 +23,32 @@ const TAU = 0.16
 const FPS = 60
 const FALLBACK_DUR = 5
 
-export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98, label, plate }: Props) {
+export default function ScrollVideo({
+  src,
+  srcMobile,
+  poster,
+  scrubVh = 200,
+  endHold = 0.98,
+  label,
+  plate,
+}: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [pinned, setPinned] = useState(false)
+  const [lite, setLite] = useState(false)
+
+  // phones and other coarse-pointer / narrow screens get the lighter file
+  useEffect(() => {
+    if (!srcMobile) return
+    const mq = window.matchMedia('(pointer: coarse), (max-width: 48rem)')
+    const resolve = () => setLite(mq.matches)
+    resolve()
+    mq.addEventListener('change', resolve)
+    return () => mq.removeEventListener('change', resolve)
+  }, [srcMobile])
+
+  const activeSrc = lite && srcMobile ? srcMobile : src
 
   // pin whenever motion is allowed — desktop and mobile alike. Data-saver users
   // keep the pin but skip the automatic download (see startLoad); reduced-motion
@@ -172,7 +196,7 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
       window.removeEventListener('pointerdown', unlock)
       window.removeEventListener('load', startLoad)
     }
-  }, [pinned, endHold])
+  }, [pinned, endHold, activeSrc])
 
   if (!pinned) {
     return (
@@ -197,7 +221,7 @@ export default function ScrollVideo({ src, poster, scrubVh = 200, endHold = 0.98
         <video
           ref={videoRef}
           className={styles.media}
-          src={src}
+          src={activeSrc}
           poster={poster}
           muted
           playsInline

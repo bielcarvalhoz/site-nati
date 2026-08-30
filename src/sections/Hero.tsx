@@ -15,6 +15,7 @@ export default function Hero() {
 
       <ScrollVideo
         src="/hero.mp4"
+        srcMobile="/hero-mobile.mp4"
         poster="/hero-poster.jpg"
         scrubVh={200}
         plate={`${SITE.fullName} · ${SITE.role}`}
