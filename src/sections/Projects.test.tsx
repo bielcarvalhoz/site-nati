@@ -9,7 +9,7 @@ it('renders every project as a card', () => {
   }
 })
 
-it('opens a project dialog with context and partido, locks scroll, then closes', () => {
+it('opens a project dialog with context and partido, then closes', () => {
   render(<Projects />)
   const project = PROJECTS[0]!
   fireEvent.click(screen.getByRole('button', { name: new RegExp(project.title) }))
@@ -19,9 +19,7 @@ it('opens a project dialog with context and partido, locks scroll, then closes',
   expect(within(dialog).getByText('Contexto')).toBeInTheDocument()
   expect(within(dialog).getByText('Partido')).toBeInTheDocument()
   expect(within(dialog).getByText(project.context)).toBeInTheDocument()
-  expect(document.body.style.overflow).toBe('hidden')
 
   fireEvent.click(within(dialog).getByRole('button', { name: /fechar/i }))
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-  expect(document.body.style.overflow).toBe('')
 })

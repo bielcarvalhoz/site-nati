@@ -30,12 +30,6 @@ export default function Projects() {
     if (!dlg) return
     if (selected && !dlg.open) dlg.showModal()
 
-    // showModal() blocks clicks behind the backdrop but not wheel/touch scroll,
-    // and in Chrome the viewport scroller is <html>, not <body> — lock both
-    const lock = selected ? 'hidden' : ''
-    document.documentElement.style.overflow = lock
-    document.body.style.overflow = lock
-
     const onClose = () => {
       setSelected(null)
       lastTrigger.current?.focus()
@@ -44,8 +38,6 @@ export default function Projects() {
     dlg.addEventListener('close', onClose)
     return () => {
       dlg.removeEventListener('close', onClose)
-      document.documentElement.style.overflow = ''
-      document.body.style.overflow = ''
     }
   }, [selected])
 
