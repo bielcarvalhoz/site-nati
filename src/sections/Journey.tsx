@@ -37,8 +37,8 @@ export default function Journey() {
                 src={entry.logo}
                 alt=""
                 loading="lazy"
-                width={28}
-                height={28}
+                width={40}
+                height={40}
               />
             ) : null}
             <p className={styles.period}>{entry.period}</p>

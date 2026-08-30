@@ -64,8 +64,13 @@
 .dialog {
   /* the global `* { margin: 0 }` reset kills the UA `dialog:modal { margin: auto }`
      that centres a modal — put it back */
+  /* modal dialogs are `position: fixed` in the top layer by UA default; pin it
+     explicitly so it stays viewport-centred (never drops into page flow, which
+     would scroll the page on open) and gives the absolute close button its
+     containing block */
+  position: fixed;
+  inset: 0;
   margin: auto;
-  position: relative; /* anchor for the close button, so it stays put while the body scrolls */
   width: min(52rem, calc(100vw - 2 * var(--gutter)));
   max-height: min(85dvh, 44rem);
   padding: 0;
