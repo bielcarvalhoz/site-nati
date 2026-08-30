@@ -1,25 +1,71 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { flushSync } from 'react-dom'
 import styles from './ContactForm.module.css'
 
 const ENDPOINT = 'https://api.web3forms.com/submit'
 
 type Status = 'idle' | 'sending' | 'ok' | 'error'
+type FieldName = 'name' | 'email' | 'message'
+type Errors = Partial<Record<FieldName, string>>
 
 const ERROR_TEXT = 'Não foi possível enviar agora. Use o e-mail ou o WhatsApp abaixo.'
 
+const WHAT: Record<FieldName, string> = {
+  name: 'seu nome',
+  email: 'seu e-mail',
+  message: 'sua mensagem',
+}
+
+// Portuguese message from the field's own native validity — the form carries
+// `noValidate`, so these render inline instead of the browser's bubbles.
+function messageFor(el: HTMLInputElement | HTMLTextAreaElement): string {
+  const v = el.validity
+  if (v.valueMissing) return `Informe ${WHAT[el.name as FieldName]}.`
+  if (v.typeMismatch) return 'E-mail inválido.'
+  return ''
+}
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
+  const [errors, setErrors] = useState<Errors>({})
   const successRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (status === 'ok') successRef.current?.focus()
   }, [status])
 
+  function validateControl(el: HTMLInputElement | HTMLTextAreaElement) {
+    const msg = messageFor(el)
+    setErrors((prev) => {
+      if ((prev[el.name as FieldName] ?? '') === msg) return prev
+      const next = { ...prev }
+      if (msg) next[el.name as FieldName] = msg
+      else delete next[el.name as FieldName]
+      return next
+    })
+    return msg
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
-    if (!form.checkValidity()) {
-      form.reportValidity()
+
+    const controls = ['name', 'email', 'message']
+      .map((n) => form.elements.namedItem(n))
+      .filter(
+        (el): el is HTMLInputElement | HTMLTextAreaElement =>
+          el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement,
+      )
+    const found: Errors = {}
+    for (const el of controls) {
+      const msg = messageFor(el)
+      if (msg) found[el.name as FieldName] = msg
+    }
+    if (Object.keys(found).length > 0) {
+      // flush so the field gains aria-invalid + aria-describedby before it takes
+      // focus — otherwise a screen reader hears the field with no error attached
+      flushSync(() => setErrors(found))
+      controls.find((el) => found[el.name as FieldName])?.focus()
       return
     }
 
@@ -61,8 +107,19 @@ export default function ContactForm() {
     )
   }
 
+  // re-check a field once it has been flagged, so the error clears as they fix it
+  const recheck = (e: FormEvent<HTMLFormElement>) => {
+    const el = e.target
+    if (
+      (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) &&
+      el.name in errors
+    ) {
+      validateControl(el)
+    }
+  }
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit} noValidate onInput={recheck}>
       <div className={styles.field}>
         <label className={styles.label} htmlFor="cf-name">
           Nome
@@ -74,7 +131,15 @@ export default function ContactForm() {
           type="text"
           required
           autoComplete="name"
+          aria-invalid={errors.name ? true : undefined}
+          aria-describedby={errors.name ? 'cf-name-err' : undefined}
+          onBlur={(e) => validateControl(e.currentTarget)}
         />
+        {errors.name ? (
+          <p className={styles.fieldError} id="cf-name-err">
+            {errors.name}
+          </p>
+        ) : null}
       </div>
 
       <div className={styles.field}>
@@ -88,14 +153,35 @@ export default function ContactForm() {
           type="email"
           required
           autoComplete="email"
+          aria-invalid={errors.email ? true : undefined}
+          aria-describedby={errors.email ? 'cf-email-err' : undefined}
+          onBlur={(e) => validateControl(e.currentTarget)}
         />
+        {errors.email ? (
+          <p className={styles.fieldError} id="cf-email-err">
+            {errors.email}
+          </p>
+        ) : null}
       </div>
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor="cf-message">
           Mensagem
         </label>
-        <textarea className={styles.textarea} id="cf-message" name="message" required />
+        <textarea
+          className={styles.textarea}
+          id="cf-message"
+          name="message"
+          required
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? 'cf-message-err' : undefined}
+          onBlur={(e) => validateControl(e.currentTarget)}
+        />
+        {errors.message ? (
+          <p className={styles.fieldError} id="cf-message-err">
+            {errors.message}
+          </p>
+        ) : null}
       </div>
 
       <input

@@ -15,12 +15,14 @@ export default function Contact() {
       <SectionHead sectionId={SECTION.contato} index="05" eyebrow="Contato" title="Vamos conversar" />
 
       <div className={styles.layout}>
-        <p className={styles.intro}>
-          Sobre um projeto, uma vaga ou uma parceria — conte o contexto e o que você tem em
-          mente. Respondo pessoalmente em até dois dias úteis.
-        </p>
+        <div className={styles.main}>
+          <p className={styles.intro}>
+            Sobre um projeto, uma vaga ou uma parceria — conte o contexto e o que você tem em
+            mente. Respondo pessoalmente em até dois dias úteis.
+          </p>
 
-        <ContactForm />
+          <ContactForm />
+        </div>
 
         <div>
           <p className={styles.channelsLabel}>Ou fale direto</p>

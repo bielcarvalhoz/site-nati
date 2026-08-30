@@ -6,6 +6,20 @@
 .layout > * {
   min-width: 0; /* let grid tracks shrink instead of the email string forcing overflow */
 }
+.main {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+/* desktop: intro + form on the left, direct channels alongside on the right */
+@media (min-width: 52rem) {
+  .layout {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--space-2xl);
+    max-width: 62rem;
+    align-items: start;
+  }
+}
 
 .intro {
   font-size: var(--text-md);

@@ -15,13 +15,26 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
-it('does not submit when required fields are empty', () => {
+it('does not submit when required fields are empty, and flags each field in Portuguese', () => {
   const fetchMock = vi.fn()
   vi.stubGlobal('fetch', fetchMock)
   render(<ContactForm />)
 
   fireEvent.click(screen.getByRole('button', { name: /enviar/i }))
   expect(fetchMock).not.toHaveBeenCalled()
+  expect(screen.getByLabelText('Nome')).toHaveAttribute('aria-invalid', 'true')
+  expect(screen.getByText('Informe seu e-mail.')).toBeInTheDocument()
+  expect(screen.getByText('Informe sua mensagem.')).toBeInTheDocument()
+})
+
+it('rejects a malformed e-mail with a specific message', () => {
+  vi.stubGlobal('fetch', vi.fn())
+  render(<ContactForm />)
+  fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Ana' } })
+  fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'nope' } })
+  fireEvent.change(screen.getByLabelText('Mensagem'), { target: { value: 'Oi.' } })
+  fireEvent.click(screen.getByRole('button', { name: /enviar/i }))
+  expect(screen.getByText('E-mail inválido.')).toBeInTheDocument()
 })
 
 it('posts to Web3Forms and shows a success message', async () => {
