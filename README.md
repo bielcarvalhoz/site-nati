@@ -1,10 +1,10 @@
 # Site — Natália Martinelli Damasceno
 
 Portfólio profissional de arquitetura: projetos realizados e acadêmicos, trajetória,
-serviços, contato, com uma cena 3D no topo.
+serviços, contato, com um vídeo scroll-scrubado no topo.
 
-**Stack:** Vite + React + TypeScript · CSS Modules + design tokens · react-three-fiber
-(hero 3D) · Vitest · deploy na Vercel.
+**Stack:** Vite + React + TypeScript · CSS Modules + design tokens · `<video>` com
+scroll-pin/scrub no hero · Vitest · deploy na Vercel.
 
 ---
 
@@ -96,10 +96,11 @@ vira o apartamento conforme você rola. No fim do vídeo o pin solta e o site co
 
 - Em `prefers-reduced-motion` ou tela ≤ 40rem, mostra só `public/hero-poster.jpg` (sem
   pin, sem baixar o vídeo).
-- O vídeo atual foi gerado no Kling (Higgsfield) usando uma **planta baixa desenhada
-  como `start_image`**, então as paredes sobem exatamente sobre as linhas da planta.
-  Pra regenerar mantendo essa coerência: desenhe/exporte a planta como imagem e passe
-  como imagem inicial.
+- O vídeo atual foi gerado no **Seedance 2.5** (Higgsfield) com `start_image` = planta
+  baixa desenhada (sem texto) e `end_image` = render do apartamento pronto, travando
+  os dois extremos da transformação. As paredes sobem exatamente sobre as linhas da
+  planta e a planta vira o piso. Pra regenerar mantendo a coerência: passe a planta
+  como imagem inicial e um interior de referência como imagem final.
 - Trocar o vídeo: gere um MP4 novo, rode o `ffmpeg` abaixo (interpola pra 60fps + deixa
   os keyframes densos = scrub suave), substitua `public/hero.mp4` + `public/hero-poster.jpg`
   (um quadro do fim). Ajuste `scrubVh` em `Hero.tsx` (~40 × duração em segundos).
