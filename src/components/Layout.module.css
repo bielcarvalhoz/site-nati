@@ -7,13 +7,13 @@
 /* Drafting-sheet margin rules at the reading-column edges (desktop only). */
 .shell::before,
 .shell::after {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   bottom: 0;
   width: 1px;
   background: var(--rule);
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 .shell::before {
@@ -57,9 +57,11 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
-  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
 }
-.header[data-scrolled='true'] {
+.header[data-scrolled="true"] {
   border-bottom-color: var(--hairline);
   background: var(--bg);
   background: color-mix(in srgb, var(--bg) 99%, transparent);
@@ -132,7 +134,7 @@
   display: inline-block;
 }
 .navList a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -159,7 +161,9 @@
   font-size: var(--text-sm);
   font-weight: 500;
   white-space: nowrap;
-  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
 }
 .cta:hover {
   background: var(--accent);
@@ -198,7 +202,7 @@
     border-bottom: 1px solid var(--hairline);
     box-shadow: var(--shadow-md);
   }
-  .navList[data-open='false'] {
+  .navList[data-open="false"] {
     display: none;
   }
   .navList a {
