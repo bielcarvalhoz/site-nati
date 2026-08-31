@@ -3,8 +3,6 @@ import { TOP_ID } from '../lib/nav'
 import ScrollVideo from '../components/ScrollVideo'
 import styles from './Hero.module.css'
 
-const HERO_FRAMES = { prefix: '/hero-frames/f', count: 90 } as const
-
 export default function Hero() {
   return (
     <>
@@ -17,7 +15,6 @@ export default function Hero() {
 
       <ScrollVideo
         src="/hero.mp4"
-        frames={HERO_FRAMES}
         poster="/hero-poster.jpg"
         scrubVh={200}
         plate={`${SITE.fullName} · ${SITE.role}`}
