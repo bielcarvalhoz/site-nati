@@ -94,8 +94,12 @@ mostra um erro e o visitante cai nos links de e-mail / WhatsApp.
 **fixo** por uma tela enquanto o scroll controla o `currentTime` — a planta na prancheta
 vira o apartamento conforme você rola. No fim do vídeo o pin solta e o site continua.
 
-- Em `prefers-reduced-motion` ou tela ≤ 40rem, mostra só `public/hero-poster.jpg` (sem
-  pin, sem baixar o vídeo).
+- Em `prefers-reduced-motion` mostra só `public/hero-poster.jpg` (sem pin, sem baixar nada).
+- No mobile / `pointer: coarse` / tela ≤ 48rem o scrub NÃO usa `<video>`: seek rápido de
+  `currentTime` é estrangulado nos decoders mobile e vira ~5fps. Em vez disso desenha uma
+  sequência de frames WebP (`public/hero-frames/f001..f090.webp`, 1280px, quality 80, ~2,2 MB,
+  só mobile, carrega depois do `load`, nunca em save-data) num `<canvas>`. Se mudar a
+  contagem, ajuste `HERO_FRAMES.count` em `Hero.tsx`.
 - O vídeo atual foi gerado no **Seedance 2.5** (Higgsfield) com `start_image` = planta
   baixa desenhada (sem texto) e `end_image` = render do apartamento pronto, travando
   os dois extremos da transformação. As paredes sobem exatamente sobre as linhas da
@@ -115,6 +119,10 @@ ffmpeg -i upscaled.mp4 -an -vf "fps=60" -c:v libx264 -preset slow -crf 19 \
   -g 4 -keyint_min 4 -sc_threshold 0 -pix_fmt yuv420p \
   -movflags +faststart public/hero.mp4
 ffmpeg -ss <seg> -i upscaled.mp4 -frames:v 1 -vf "scale=1920:-2" -q:v 3 public/hero-poster.jpg
+
+# frames do mobile (sequência WebP desenhada no <canvas>)
+ffmpeg -i public/hero.mp4 -vf "scale=1280:-2,fps=18" -c:v libwebp -quality 80 \
+  public/hero-frames/f%03d.webp
 ```
 
 ---
