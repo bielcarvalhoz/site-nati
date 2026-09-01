@@ -1,12 +1,9 @@
 # Site — Natália Martinelli Damasceno
 
-Portfólio profissional de arquitetura: projetos realizados e acadêmicos, trajetória,
-serviços, contato, com um vídeo scroll-scrubado no topo.
+Portfólio de arquitetura numa página só: projetos do curso e acadêmicos, trajetória,
+serviços e contato. O topo é um vídeo que anda conforme você dá scroll.
 
-**Stack:** Vite + React + TypeScript · CSS Modules + design tokens · `<video>` com
-scroll-pin/scrub no hero · Vitest · deploy na Vercel.
-
----
+**Stack:** Vite + React + TypeScript, CSS Modules com design tokens, Vitest, deploy na Vercel.
 
 ## Rodar
 
@@ -17,32 +14,30 @@ npm run dev        # localhost:5173
 
 | Script | O que faz |
 |--------|-----------|
-| `npm run dev` | servidor de desenvolvimento |
+| `npm run dev` | dev server |
 | `npm run build` | build de produção em `dist/` (roda `tsc` antes) |
-| `npm run preview` | serve o `dist/` (porta 4173) |
-| `npm test` | testes (Vitest) |
+| `npm run preview` | serve o `dist/` na porta 4173 |
+| `npm test` | Vitest |
 | `npm run lint` | oxlint |
-| `npm run shots` | screenshots em `screenshots/` (precisa do `preview` rodando) |
+| `npm run shots` | screenshots em `screenshots/`, precisa do `preview` no ar |
 
----
+## Conteúdo
 
-## Editar o conteúdo
-
-Todo o texto e os dados ficam em **`src/data/`** — não há texto fixo nos componentes.
-Os dados vêm do portfólio/currículo dela (`src/assets/portfolio-antigo.pdf`, fora do
-versionamento). Procure por `TODO` para o que ainda falta confirmar.
+Texto e dados ficam todos em `src/data/`; os componentes não carregam texto fixo. A fonte
+é o portfólio e o currículo dela (`src/assets/portfolio-antigo.pdf`, fora do git). `TODO`
+marca o que ainda falta confirmar.
 
 | Arquivo | Conteúdo |
 |---------|----------|
 | `site.ts` | nome, título, frase do topo, textos do "Sobre", e-mail, telefone, WhatsApp, LinkedIn, cidade |
 | `projects.ts` | os 6 projetos autorais do curso |
-| `journey.ts` | linha do tempo (formação + estágios) |
-| `services.ts` | competências (`SERVICES`) + softwares (`TOOLS`) |
+| `journey.ts` | linha do tempo: formação e estágios |
+| `services.ts` | competências (`SERVICES`) e softwares (`TOOLS`) |
 | `metrics.ts` | números da "Trajetória" |
 
 ### Adicionar um projeto
 
-Em `src/data/projects.ts`, acrescente um objeto ao array `PROJECTS`:
+Acrescente um objeto ao array `PROJECTS` em `src/data/projects.ts`:
 
 ```ts
 {
@@ -53,66 +48,59 @@ Em `src/data/projects.ts`, acrescente um objeto ao array `PROJECTS`:
   location: 'São Paulo, SP',            // opcional
   area: '120 m²',                       // opcional
   summary: 'Uma linha para o card.',
-  context: 'O contexto / a disciplina.',
-  solution: 'O partido — a ideia de projeto.',
+  context: 'O contexto e a disciplina.',
+  solution: 'O partido, a ideia de projeto.',
 },
 ```
 
-O card e o detalhe (no `<dialog>`) aparecem sozinhos.
+O card e o `<dialog>` de detalhe saem daí.
 
-### Colocar fotos reais
+### Fotos dos projetos
 
-Enquanto um projeto não tem `cover`, o site desenha um retângulo cinza determinístico.
-Para usar fotos:
+Sem `cover`, o site desenha um retângulo cinza fixo por projeto. Para usar fotos:
 
-1. coloque as imagens em `src/assets/<id-do-projeto>/`
-2. no objeto do projeto, aponte para elas:
+1. imagens em `src/assets/<id-do-projeto>/`
+2. aponte para elas no objeto do projeto:
 
 ```ts
 cover: '/src/assets/casa-cotia/capa.jpg',
 gallery: ['/src/assets/casa-cotia/01.jpg', '/src/assets/casa-cotia/02.jpg'],
 ```
 
-`gallery` precisa ter pelo menos uma imagem (o tipo obriga).
-
----
+`gallery` exige pelo menos uma imagem.
 
 ## Formulário de contato
 
-Usa o [Web3Forms](https://web3forms.com) (grátis, sem conta). Sem a chave, o formulário
-mostra um erro e o visitante cai nos links de e-mail / WhatsApp.
+Roda no [Web3Forms](https://web3forms.com). A chave já está nas variáveis de ambiente da
+Vercel (`VITE_WEB3FORMS_KEY`) e as mensagens vão para o e-mail da Natália, definido no
+painel do Web3Forms. Sem a chave o formulário mostra erro e o visitante cai nos links de
+e-mail e WhatsApp.
 
-1. pegue uma chave em web3forms.com
-2. `cp .env.example .env.local` e cole a chave em `VITE_WEB3FORMS_KEY`
-3. na Vercel: **Settings → Environment Variables → `VITE_WEB3FORMS_KEY`**
-
----
+Para rodar local: `cp .env.example .env.local` e cole a chave em `VITE_WEB3FORMS_KEY`.
 
 ## Hero em vídeo
 
-`src/components/ScrollVideo.tsx`. O topo é um `<video>` (`public/hero.mp4`) que fica
-**fixo** por uma tela enquanto o scroll controla o `currentTime` — a planta na prancheta
-vira o apartamento conforme você rola. No fim do vídeo o pin solta e o site continua.
+`src/components/ScrollVideo.tsx`. No desktop o topo é um `<video>` (`public/hero.mp4`) que
+fica preso por uma tela enquanto o scroll controla o `currentTime`: a planta na prancheta
+vira o apartamento à medida que você rola. Passado o vídeo, o pin solta e a página segue.
 
-- Em `prefers-reduced-motion` mostra só `public/hero-poster.jpg` (sem pin, sem baixar nada).
-- No mobile / `pointer: coarse` / tela ≤ 48rem o scrub NÃO usa `<video>`: seek rápido de
-  `currentTime` é estrangulado nos decoders mobile e vira ~5fps. Em vez disso desenha uma
-  sequência de frames WebP (`public/hero-frames/f001..f090.webp`, 1280px, quality 80, ~2,2 MB,
-  só mobile, carrega depois do `load`, nunca em save-data) num `<canvas>`. Se mudar a
-  contagem, ajuste `HERO_FRAMES.count` em `Hero.tsx`.
-- O vídeo atual foi gerado no **Seedance 2.5** (Higgsfield) com `start_image` = planta
-  baixa desenhada (sem texto) e `end_image` = render do apartamento pronto, travando
-  os dois extremos da transformação. As paredes sobem exatamente sobre as linhas da
-  planta e a planta vira o piso. Pra regenerar mantendo a coerência: passe a planta
-  como imagem inicial e um interior de referência como imagem final.
-- Resolução/fps: o `hero.mp4` atual (1920×1080, 60fps) saiu do **`upscale_video` do
-  Higgsfield** (provider `bytedance`, preset `aigc`, `resolution:1080p`, `fps:60`) em
-  cima do job do Seedance. É upscale de IA de verdade, não `scale` — a origem do
-  Seedance é 720p/24fps.
-- Trocar o vídeo: gere o MP4, passe pelo `upscale_video` (1080p/60fps), depois rode o
-  `ffmpeg` abaixo só pra deixar os keyframes densos (`-g 4` = seek do scrub quase
-  exato) e substitua `public/hero.mp4` + `public/hero-poster.jpg` (um quadro do fim).
-  Ajuste `scrubVh` em `Hero.tsx` (~40 × duração em segundos).
+- `prefers-reduced-motion`: mostra só `public/hero-poster.jpg`, sem pin e sem baixar o vídeo.
+- Mobile, `pointer: coarse` ou tela ≤ 48rem: não usa `<video>`. Seek de `currentTime` frame
+  a frame trava nos decoders de celular e cai para uns 5fps. No lugar, desenha uma sequência
+  de WebP num `<canvas>` (`public/hero-frames/f001..f090.webp`, 1280px, quality 80, ~2,2 MB).
+  Carrega depois do `load`, nunca em save-data. Se mudar a contagem de frames, ajuste
+  `HERO_FRAMES.count` no `Hero.tsx`.
+
+O vídeo saiu do Seedance 2.5 (Higgsfield), com `start_image` na planta baixa desenhada sem
+texto e `end_image` no render do apartamento pronto, para travar os dois extremos da
+transformação. Depois passou pelo `upscale_video` do Higgsfield (provider `bytedance`,
+preset `aigc`, 1080p, 60fps), já que o Seedance entrega 720p/24fps. O `hero.mp4` final é
+1920×1080 a 60fps.
+
+Para trocar o vídeo: gere o MP4, passe pelo `upscale_video`, rode o `ffmpeg` abaixo para
+adensar os keyframes (`-g 4` deixa o seek do scrub quase exato) e substitua `public/hero.mp4`
+e `public/hero-poster.jpg` (um quadro do fim do vídeo). Ajuste `scrubVh` no `Hero.tsx`,
+mais ou menos 40 vezes a duração em segundos.
 
 ```bash
 ffmpeg -i upscaled.mp4 -an -vf "fps=60" -c:v libx264 -preset slow -crf 19 \
@@ -120,28 +108,23 @@ ffmpeg -i upscaled.mp4 -an -vf "fps=60" -c:v libx264 -preset slow -crf 19 \
   -movflags +faststart public/hero.mp4
 ffmpeg -ss <seg> -i upscaled.mp4 -frames:v 1 -vf "scale=1920:-2" -q:v 3 public/hero-poster.jpg
 
-# frames do mobile (sequência WebP desenhada no <canvas>)
+# frames do mobile
 ffmpeg -i public/hero.mp4 -vf "scale=1280:-2,fps=18" -c:v libwebp -quality 80 \
   public/hero-frames/f%03d.webp
 ```
 
----
-
 ## Deploy (Vercel)
 
-A Vercel detecta o Vite automaticamente (`npm run build` → `dist/`).
+A Vercel reconhece o Vite sozinha (`npm run build` → `dist/`).
 
-- `vercel.json` já define os headers de segurança e a CSP (libera o `api.web3forms.com`).
-- defina `VITE_WEB3FORMS_KEY` nas variáveis de ambiente do projeto.
-- recomendado: _Install Command_ `npm ci --omit=dev` para não subir as dev-dependencies.
+- `vercel.json` traz os headers de segurança e a CSP, que já libera `api.web3forms.com`.
+- `VITE_WEB3FORMS_KEY` precisa estar nas variáveis de ambiente do projeto.
+- Install Command sugerido: `npm ci --omit=dev`, para não subir dev-dependency.
 
----
+## Pendente
 
-## Ainda pendente
-
-- confirmar com ela o texto em geral: "Sobre" e frase do topo (`site.ts`), resumos
-  dos projetos (`projects.ts`), descrições da trajetória (`journey.ts`)
-- **retrato** (`public/natalia.jpg`) é uma selfie do portfólio antigo — trocar por
-  headshot quando ela tiver um
-- pranchas dos projetos são recortes de página do PDF; se ela tiver os renders em
-  alta, substituir em `public/projetos/<id>/`
+- revisar o texto com ela: "Sobre" e frase do topo (`site.ts`), resumos dos projetos
+  (`projects.ts`), descrições da trajetória (`journey.ts`)
+- `public/natalia.jpg` é uma selfie do portfólio antigo; trocar por um headshot quando tiver
+- as pranchas dos projetos são recortes de página do PDF; havendo os renders em alta, trocar
+  em `public/projetos/<id>/`
